@@ -1,11 +1,11 @@
 <template>
 
     <div class="container-fluid vh-100 d-flex">
-        <div class="row flex-grow-1">
-            <main class="col p-4 flex-fill" style="background-color: rgba(0,0,255,.1);"> 
+        <div class="row flex-grow-1 color-bg-gray-600">
+            <main class="row flex-fill"> 
+            <!-- <main class="col p-4 flex-fill">  -->
                 <!-- style="background-color: rgba(0,0,255,.1);" -->
                 
-                <div class="row dynamic-color">
                     <Colors color="red"/>
                     <Colors color="pink"/>
                     <Colors color="purple"/>
@@ -27,8 +27,129 @@
                     <Colors color="blue-gray"/>
                     <Colors color="white"/>
                     <Colors color="black"/>
-                </div>
 
+                <!--
+                <div class="row dynamic-color">
+                </div>
+                -->
+
+                <main class="col-12 mt-3 flex-fill">
+                    <div class="row p-3">
+                        <div class="col-4 color-gray-800 p-2">
+                            <div class="col-12 flex-fill">
+                                izquierda
+                            </div>
+                        </div>
+                        <div class="col-8 color-bg-gray-50 p-2">
+
+                            <div class="card card-outline">
+                                <div class="card-header">
+                                    <p class="card-title h4">
+                                        Who am I?
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    I'm a developer born in Venezuela and CTO of <a href="https://dibal.pe">Dibal.pe</a>.
+I'm interested and skilled in different topics of Information Technology including programming, web development, and computer and network security.
+                                </div>
+                            </div>
+
+                            <div class="card card-outline mt-3">
+                                <div class="card-header">
+                                    <p class="card-title h4">
+                                        What am I proud of?
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i aria-hidden="true" class="v-icon v-icon--right mdi mdi-help-rhombus-outline theme--light"></i>
+                                        </div>
+                                        <div class="col-11">
+                                            <p>
+                                                <strong>
+                                                    De haber iniciado con una StartUp desde cero hasta que se mantiene por si sola.
+                                                </strong>
+                                                <br>
+                                                <small>
+                                                    (Dibal.pe por su crecimiento constante)
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i aria-hidden="true" class="v-icon v-icon--right mdi mdi-help-rhombus-outline theme--light"></i>
+                                        </div>
+                                        <div class="col-11">
+                                            <p>
+                                                <strong>
+                                                    De haberme graduado como Ingeniero en Informatica
+                                                </strong>
+                                                <br>
+                                                <small>
+                                                    (Por mi graduacion de la universidad)
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card card-outline mt-3">
+                                <div class="card-header">
+                                    <p class="card-title h4">
+                                        Education
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            2011 - 2016.
+                                        </div>
+                                        <div class="col-9">
+                                            <p>
+                                                <strong>
+                                                    Ingenieria en Informatica
+                                                </strong>
+                                                <br>
+                                                <small>
+                                                    IUTAB University.
+                                                    <br/>
+                                                    Aprender las bases de la tecnologia.
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card card-outline mt-3">
+                                <div class="card-header">
+                                    <p class="card-title h4">
+                                        Skills and Expertize
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>
+                                                <strong>
+                                                    PHP
+                                                </strong>
+                                                <br>
+                                                <small>
+                                                    
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </main>
             </main>
         </div>
     </div>
@@ -39,16 +160,6 @@
     </div> -->
     <!-- <div class="container fluid fill-height" style="background-color: rgba(0,0,255,.1);">
 
-        <main class="col-12 mt-3 flex-fill">
-            <div class="row p-3">
-                <div class="col-4">
-                    izq
-                </div>
-                <div class="col-8">
-                    der
-                </div>
-            </div>
-        </main>
 
         <Home/>
         
@@ -63,7 +174,7 @@ import Colors from './components/Colors'
 export default {
     name: 'App',
     components: {
-        Colors,
+        Colors
     }
 }
 </script>
