@@ -1,10 +1,43 @@
 <template>
 
+    <div class="container-fluid vh-100 d-flex">
+        <div class="row flex-grow-1">
+            <main class="col p-4 flex-fill" style="background-color: rgba(0,0,255,.1);"> 
+                <!-- style="background-color: rgba(0,0,255,.1);" -->
+                
+                <div class="row dynamic-color">
+                    <Colors color="red"/>
+                    <Colors color="pink"/>
+                    <Colors color="purple"/>
+                    <Colors color="deep-purple"/>
+                    <Colors color="indigo"/>
+                    <Colors color="blue"/>
+                    <Colors color="light-blue"/>
+                    <Colors color="cyan"/>
+                    <Colors color="teal"/>
+                    <Colors color="green"/>
+                    <Colors color="light-green"/>
+                    <Colors color="lime"/>
+                    <Colors color="yellow"/>
+                    <Colors color="amber"/>
+                    <Colors color="orange"/>
+                    <Colors color="deep-orange"/>
+                    <Colors color="brown"/>
+                    <Colors color="gray"/>
+                    <Colors color="blue-gray"/>
+                    <Colors color="white"/>
+                    <Colors color="black"/>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
     <!-- <div id="wrapper" class="mh-100">
         <div class="container">
         </div>
     </div> -->
-    <div class="container fluid fill-height" style="background-color: rgba(0,0,255,.1);">
+    <!-- <div class="container fluid fill-height" style="background-color: rgba(0,0,255,.1);">
 
         <main class="col-12 mt-3 flex-fill">
             <div class="row p-3">
@@ -18,37 +51,19 @@
         </main>
 
         <Home/>
-        <!-- <nav class="navbar navbar-expand-sm navbar-light flex-shrink-0">
-            <a class="brand navbar-brand" href="/">Brand</a>
-            <button class="navbar-toggler s-btn-hamburger order-first s-color-icons" aria-expanded="true" aria-controls="navbar-test" aria-label="Toggle navigation" type="button" data-target="#navbar-test" data-toggle="collapse">
-                <span class="navbar-toggler-icon k-icon k-icon-md k-i-hamburger"></span>
-            </button>
-            <div class="navbar-collapse collapse show" id="navbar-test">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="dropdown1" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown">Menu Item</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown1">
-                            <a class="dropdown-item" href="#">Sub menu</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Test</a>
-                    </li>
-                </ul>
-            </div>
-        </nav> -->
-    </div>
+        
+    </div> -->
 
 </template>
 
 <script>
 
-import Home from './components/Home'
+import Colors from './components/Colors'
 
 export default {
     name: 'App',
     components: {
-            Home,
+        Colors,
     }
 }
 </script>
