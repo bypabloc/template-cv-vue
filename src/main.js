@@ -1,5 +1,24 @@
+
+
+/*
+
+import { createApp } from 'vue'
+import { store } from './store'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.use(store)
+
+app.mount('#app')
+
+*/
+
+
 import { createApp } from 'vue'
 import App from './App.vue'
+import store from './store'
+import router from './router'
 
 // Custom.scss
 // Option A: Include all of Bootstrap
@@ -10,9 +29,13 @@ import 'bootstrap'
 
 // import 'bootstrap-icons';
 import '/node_modules/bootstrap-icons/font/bootstrap-icons.css'
+import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css'
 
 
 // custom.scss (or app.scss)
 import '../src/assets/scss/custom.scss';
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(store)
+app.use(router)
+app.mount('#app')

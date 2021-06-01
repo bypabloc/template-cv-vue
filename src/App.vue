@@ -1,7 +1,7 @@
 <template>
 
     <div class="container-fluid vh-100 d-flex">
-        <div class="row flex-grow-1 theme-bg-gray-600">
+        <div :class="'row flex-grow-1 theme-bg-'+[theme]+'-600'">
             <main class="row flex-fill"> 
 
             <!-- <main class="col p-4 flex-fill">  -->
@@ -35,16 +35,15 @@
 
                 <main class="col-12 mt-3 flex-fill">
                     <div class="row p-3">
-                        <div class="col-4 theme-gray-800 p-2">
+                        <div :class="'col-4 theme-bg-'+[theme]+'-800 p-2'">
                             <div class="col-12 flex-fill">
                                 izquierda
 
                                 <svg class="bi bi-alert-triangle text-success" width="32" height="32" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"></svg>
                             </div>
                         </div>
-                        <div class="col-8 theme-bg-gray-50 p-2">
-
-                            <div class="card">
+                        <div :class="'col-8 theme-'+[theme]+'-100 p-2'">
+                            <div :class="'card'">
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <ins>
@@ -66,57 +65,48 @@ I'm interested and skilled in different topics of Information Technology includi
                                             What am I proud of?
                                         </ins>
                                     </h5>
-                                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <i class="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i>
-                                            </div>
-                                            <div class="col-11">
-                                                <p>
-                                                    <strong>
-                                                        De haber iniciado con una StartUp desde cero hasta que se mantiene por si sola.
-                                                    </strong>
-                                                    <small>
-                                                        (Dibal.pe por su crecimiento constante)
-                                                    </small>
-                                                </p>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i :class="'bi-graph-up theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-1">
-                                                <i aria-hidden="true" class="v-icon v-icon--right mdi mdi-help-rhombus-outline theme--light"></i>
-                                            </div>
-                                            <div class="col-11">
-                                                <p>
-                                                    <strong>
-                                                        De haberme graduado como Ingeniero en Informatica
-                                                    </strong>
-                                                    <small>
-                                                        
-                                                    </small>
-                                                </p>
-                                            </div>
+                                        <div class="col-11">
+                                            <p>
+                                                <strong>
+                                                    De haber iniciado con una StartUp desde cero hasta que se mantiene por si sola.
+                                                </strong>
+                                                <br/>
+                                                <small>
+                                                    Dibal.pe por haber sido el primer programador
+                                                </small>
+                                            </p>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i :class="'bi-bank theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="col-11">
+                                            <p>
+                                                <strong>
+                                                    Haberme graduado de Ingeniero en Informatica
+                                                </strong>
+                                                <br/>
+                                                <small>
+                                                    La constancia nos enseña que todo vale la pena
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="card card-outline mt-3">
-                                <div class="card-header">
-                                    <p class="card-title h4">
-                                        
-                                    </p>
-                                </div>
+                            <div class="card mt-2">
                                 <div class="card-body">
-                                </div>
-                            </div>
-
-                            <div class="card card-outline mt-3">
-                                <div class="card-header">
-                                    <p class="card-title h4">
-                                        Education
-                                    </p>
-                                </div>
-                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <ins>
+                                            Education
+                                        </ins>
+                                    </h5>
                                     <div class="row">
                                         <div class="col-3">
                                             2011 - 2016.
@@ -137,30 +127,94 @@ I'm interested and skilled in different topics of Information Technology includi
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card card-outline mt-3">
-                                <div class="card-header">
-                                    <p class="card-title h4">
-                                        Skills and Expertize
-                                    </p>
-                                </div>
+                            
+                            <Skills/>
+<!-- 
+                            <div class="card mt-2">
                                 <div class="card-body">
+                                    <h5 class="card-title">
+                                        <ins>
+                                            Skills and Expertize
+                                        </ins>
+                                    </h5>
                                     <div class="row">
                                         <div class="col-6">
-                                            <p>
-                                                <strong>
-                                                    PHP
-                                                </strong>
-                                                <br>
-                                                <small>
-                                                    
-                                                </small>
-                                            </p>
+                                            <i class="fab fa-php" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            PHP
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fab fa-js" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            JavaScript
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fab fa-laravel" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            Laravel Framework
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fab fa-vuejs" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            VueJS Framework
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <i class="fab fa-ubuntu" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            Ubuntu Server
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fab fa-centos" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+
+                                            CentOS
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <i class="fab fa-aws" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            Amazon Web Services
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <i class="fab fa-git" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            Git
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <i class="fab fa-github" :class="'theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                                            GitHub
+                                            <div class="progress" style="height: 3px;">
+                                                <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
-
+                             -->
                         </div>
                     </div>
                 </main>
@@ -179,17 +233,29 @@ I'm interested and skilled in different topics of Information Technology includi
         
     </div> -->
 
+
 </template>
 
 <script>
 
 // import Colors from './components/Colors'
+import Skills from './components/Skills'
+
 
 export default {
     name: 'App',
     components: {
         // Colors,
-    }
+        Skills,
+    },
+    data() {
+        return {
+            theme: String,
+        }
+    },
+    mounted() {
+        this.theme = 'light-blue';
+    },
 }
 </script>
 
