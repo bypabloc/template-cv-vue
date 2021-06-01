@@ -105,35 +105,9 @@ I'm interested and skilled in different topics of Information Technology includi
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <ins>
-                                            Education
-                                        </ins>
-                                    </h5>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            2011 - 2016.
-                                        </div>
-                                        <div class="col-9">
-                                            <p>
-                                                <strong>
-                                                    Informatics Engineer
-                                                </strong>
-                                                <br>
-                                                <small>
-                                                    IUTAB University.
-                                                    <br/>
-                                                    Learn the basics of technology.
-                                                </small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             
+                            <Education/>
+
                             <Skills/>
 <!-- 
                             <div class="card mt-2">
@@ -246,13 +220,14 @@ I'm interested and skilled in different topics of Information Technology includi
 
 // import Colors from './components/Colors'
 import Skills from './components/Skills'
-
+import Education from './components/Education'
 
 export default {
     name: 'App',
     components: {
         // Colors,
         Skills,
+        Education,
     },
     data() {
         return {
