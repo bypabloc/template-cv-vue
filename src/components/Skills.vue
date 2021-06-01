@@ -34,19 +34,9 @@ export default {
             theme: String,
             skills: [
                 {
-                    icon: 'fab fa-php',
-                    text: 'PHP',
-                    percentage: 75,
-                },
-                {
                     icon: 'fab fa-js',
                     text: 'JavaScript',
                     percentage: 75,
-                },
-                {
-                    icon: 'fab fa-laravel',
-                    text: 'Laravel Framework',
-                    percentage: 70,
                 },
                 {
                     icon: 'fab fa-vuejs',
@@ -54,19 +44,14 @@ export default {
                     percentage: 60,
                 },
                 {
-                    icon: 'fab fa-ubuntu',
-                    text: 'Ubuntu Server',
-                    percentage: 60,
+                    icon: 'fab fa-php',
+                    text: 'PHP',
+                    percentage: 75,
                 },
                 {
-                    icon: 'fab fa-centos',
-                    text: 'CentOS',
-                    percentage: 30,
-                },
-                {
-                    icon: 'fab fa-aws',
-                    text: 'Amazon Web Services',
-                    percentage: 40,
+                    icon: 'fab fa-laravel',
+                    text: 'Laravel Framework',
+                    percentage: 70,
                 },
                 {
                     icon: 'fab fa-git',
@@ -77,6 +62,36 @@ export default {
                     icon: 'fab fa-github',
                     text: 'GitHub',
                     percentage: 75,
+                },
+                {
+                    icon: 'fab fa-ubuntu',
+                    text: 'Ubuntu Server',
+                    percentage: 60,
+                },
+                {
+                    icon: 'fab fa-aws',
+                    text: 'Amazon Web Services',
+                    percentage: 40,
+                },
+                {
+                    icon: 'fab fa-centos',
+                    text: 'CentOS',
+                    percentage: 30,
+                },
+                {
+                    icon: 'fab fa-html5',
+                    text: 'HTML 5',
+                    percentage: 60,
+                },
+                {
+                    icon: 'fab fa-css3',
+                    text: 'CSS 3',
+                    percentage: 20,
+                },
+                {
+                    icon: 'fab fa-sass',
+                    text: 'SASS 3',
+                    percentage: 20,
                 },
             ],
         }

@@ -72,11 +72,17 @@ I'm interested and skilled in different topics of Information Technology includi
                                         <div class="col-11">
                                             <p>
                                                 <strong>
-                                                    De haber iniciado con una StartUp desde cero hasta que se mantiene por si sola.
+                                                    Having started with a StartUp from scratch until it is self-sustaining (Dibal.pe).
                                                 </strong>
                                                 <br/>
                                                 <small>
-                                                    Dibal.pe por haber sido el primer programador
+                                                    For having been the first programmer
+                                                    <br/>
+                                                    For having fought to make it grow
+                                                    <br/>
+                                                    For having fought against the pandemic and not giving up with all the cons that were presented to us 
+                                                    <br/>
+                                                    For my leadership in each new member of the team.
                                                 </small>
                                             </p>
                                         </div>
@@ -88,11 +94,11 @@ I'm interested and skilled in different topics of Information Technology includi
                                         <div class="col-11">
                                             <p>
                                                 <strong>
-                                                    Haberme graduado de Ingeniero en Informatica
+                                                    Have graduated as an Informatics Engineer.
                                                 </strong>
                                                 <br/>
                                                 <small>
-                                                    La constancia nos enseña que todo vale la pena
+                                                    The pride of having exceeded one goal, of so many, of my life.
                                                 </small>
                                             </p>
                                         </div>
@@ -114,13 +120,13 @@ I'm interested and skilled in different topics of Information Technology includi
                                         <div class="col-9">
                                             <p>
                                                 <strong>
-                                                    Ingenieria en Informatica
+                                                    Informatics Engineer
                                                 </strong>
                                                 <br>
                                                 <small>
                                                     IUTAB University.
                                                     <br/>
-                                                    Aprender las bases de la tecnologia.
+                                                    Learn the basics of technology.
                                                 </small>
                                             </p>
                                         </div>
