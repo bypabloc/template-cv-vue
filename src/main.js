@@ -8,8 +8,11 @@ import App from './App.vue'
 
 import 'bootstrap'
 
+// import 'bootstrap-icons';
+import '/node_modules/bootstrap-icons/font/bootstrap-icons.css'
+
+
 // custom.scss (or app.scss)
-import 'bootstrap/scss/bootstrap.scss';
 import '../src/assets/scss/custom.scss';
 
 createApp(App).mount('#app')
