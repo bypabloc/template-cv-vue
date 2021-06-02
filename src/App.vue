@@ -13,21 +13,7 @@
                             </div>
                         </div>
                         <div :class="'col-8 theme-'+[theme]+'-100 p-2'">
-                            <div :class="'card'">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <ins>
-                                            Who am I?
-                                        </ins>
-                                    </h5>
-                                    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                                    <p class="card-text">
-                                        I'm a developer born in Venezuela and CTO of <a href="https://dibal.pe">Dibal.pe</a>.
-I'm interested and skilled in different topics of Information Technology including programming, web development, and computer and network security.
-                                    </p>
-                                </div>
-                            </div>
-                            
+                            <Iam/>
                             <Proud/>
                             <Education/>
                             <Skills/>
@@ -55,9 +41,10 @@ I'm interested and skilled in different topics of Information Technology includi
 <script>
 
 // import Colors from './components/Colors'
-import Skills from './components/Skills'
-import Education from './components/Education'
+import Iam from './components/Iam'
 import Proud from './components/Proud'
+import Education from './components/Education'
+import Skills from './components/Skills'
 
 export default {
     name: 'App',
@@ -66,7 +53,8 @@ export default {
         Skills,
         Education,
         Proud,
-    },
+   
+        Iam },
     data() {
         return {
             theme: String,
