@@ -16,8 +16,7 @@
                             {{ value.title }}
                         </strong>
                         <br/>
-                        <small>
-                            {{ value.description }}
+                        <small v-html="value.description">
                         </small>
                     </p>
                 </div>
@@ -40,7 +39,7 @@ export default {
                 {
                     icon: 'fas fa-chart-line',
                     title: 'Having started with a StartUp from scratch until it is self-sustaining (Dibal.pe).',
-                    description: 'For having been the first programmer. For having fought to make it grow. For having fought against the pandemic and not giving up with all the cons that were presented to us. For my leadership in each new member of the team.',
+                    description: 'For having been the first programmer.<br/>For having fought to make it grow.<br/>For having fought against the pandemic and not giving up with all the cons that were presented to us.<br/>For my leadership in each new member of the team.',
                 },
                 {
                     icon: 'fas fa-graduation-cap',

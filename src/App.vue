@@ -3,20 +3,20 @@
     <div class="container-fluid vh-100 d-flex">
         <div :class="'row flex-grow-1 theme-bg-'+[theme]+'-600'">
             <main class="row flex-fill"> 
-                <main class="col-12 mt-3 flex-fill">
+                <main class="col-12 flex-fill">
                     <div class="row p-3">
-                        <div :class="'col-4 theme-bg-'+[theme]+'-800 p-2'">
+                        <div :class="'col-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 col-xxl-3 theme-bg-'+[theme]+'-800 p-2'">
                             <div class="col-12 flex-fill">
-                                izquierda
 
-                                <svg class="bi bi-alert-triangle text-success" width="32" height="32" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"></svg>
+                                <Picture url="https://dibal-storage.s3.us-east-2.amazonaws.com/images/img_profile.png"/>
+
                             </div>
                         </div>
-                        <div :class="'col-8 theme-'+[theme]+'-100 p-2'">
-                            <Iam/>
-                            <Proud/>
-                            <Education/>
-                            <Skills/>
+                        <div :class="'col-12 col-sm-12 col-md-7 col-lg-8 col-xl-9 col-xxl-9 theme-'+[theme]+'-100 p-2'">
+                            <iam/>
+                            <proud/>
+                            <education/>
+                            <skills/>
                         </div>
                     </div>
                 </main>
@@ -45,6 +45,7 @@ import Iam from './components/Iam'
 import Proud from './components/Proud'
 import Education from './components/Education'
 import Skills from './components/Skills'
+import Picture from './components/Picture'
 
 export default {
     name: 'App',
@@ -54,7 +55,9 @@ export default {
         Education,
         Proud,
    
-        Iam },
+        Iam,
+        Picture,
+    },
     data() {
         return {
             theme: String,
