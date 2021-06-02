@@ -3,7 +3,7 @@
     <div :class="'card'">
         <div class="card-body">
             <h5 class="card-title">
-                <Title text="Who am I?"/>
+                <Title :text="title"/>
             </h5>
             <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
             <div class="card-text">
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             theme: String,
+            title: "Who am I?",
             descriptions: [
                 {
                     text: `I'm a developer born in Venezuela and CTO of <a href="https://dibal.pe">Dibal.pe</a>. I'm interested and skilled in different topics of Information Technology including programming, web development, and computer and network security.`,

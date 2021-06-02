@@ -2,7 +2,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <Title text="Skills and Expertize"/>
+                <Title :text="title"/>
             </h5>
             <div class="row">
                 <div class="col-6" v-for="(value, index) in skills" :key="index">
@@ -32,6 +32,7 @@ export default {
     data() {
         return {
             theme: String,
+            title: "Skills and Expertize",
             skills: [
                 {
                     icon: 'fab fa-js',

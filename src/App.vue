@@ -8,7 +8,13 @@
                         <div :class="'col-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 col-xxl-3 theme-bg-'+[theme]+'-800 p-2'">
                             <div class="col-12 flex-fill">
 
-                                <Picture url="https://dibal-storage.s3.us-east-2.amazonaws.com/images/img_profile.png"/>
+                                <picture-profile class="pt-2" url="https://dibal-storage.s3.us-east-2.amazonaws.com/images/img_profile.png"/>
+                                <name/>
+
+                                <info/>
+                                <socials/>
+                                <hobbies/>
+                                <languages/>
 
                             </div>
                         </div>
@@ -41,22 +47,31 @@
 <script>
 
 // import Colors from './components/Colors'
-import Iam from './components/Iam'
-import Proud from './components/Proud'
-import Education from './components/Education'
-import Skills from './components/Skills'
-import Picture from './components/Picture'
+import name from './components/Name'
+import iam from './components/Iam'
+import proud from './components/Proud'
+import education from './components/Education'
+import skills from './components/Skills'
+import info from './components/Info'
+import socials from './components/Socials'
+import hobbies from './components/Hobbies'
+import PictureProfile from './components/Picture'
+import languages from './components/Languages'
 
 export default {
     name: 'App',
     components: {
         // Colors,
-        Skills,
-        Education,
-        Proud,
-   
-        Iam,
-        Picture,
+        skills,
+        education,
+        proud,
+        name,
+        iam,
+        info,
+        socials,
+        hobbies,
+        languages,
+        PictureProfile,
     },
     data() {
         return {

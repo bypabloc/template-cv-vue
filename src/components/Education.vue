@@ -2,7 +2,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <Title text="Education"/>
+                <Title :text="title"/>
             </h5>
             <div class="row" v-for="(value, index) in education" :key="index">
                 <div class="col-3">
@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             theme: String,
+            title: "Education",
             education: [
                 {
                     start: '2011',

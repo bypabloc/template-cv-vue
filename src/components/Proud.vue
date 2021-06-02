@@ -3,7 +3,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <Title text="What am I proud of?"/>
+                <Title :text="title"/>
             </h5>
             <div class="row" v-for="(value, index) in prouds" :key="index">
                 <div class="col-1">
@@ -35,6 +35,7 @@ export default {
     data() {
         return {
             theme: String,
+            title: "What am I proud of?",
             prouds: [
                 {
                     icon: 'fas fa-chart-line',

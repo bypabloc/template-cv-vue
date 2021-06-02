@@ -41,9 +41,9 @@ export default {
         border-radius: 50%;
     }
 
-    @media (min-width: 0px) and (max-width: 600px) {
+    @media (min-width: 0px) and (max-width: 150px) {
         img {
-            width: 250px;
+            width: 90px;
         }
     }
 
