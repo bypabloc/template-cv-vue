@@ -3,9 +3,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <ins>
-                    What am I proud of?
-                </ins>
+                <Title text="What am I proud of?"/>
             </h5>
             <div class="row" v-for="(value, index) in prouds" :key="index">
                 <div class="col-1">
@@ -31,6 +29,8 @@
 
 <script>
 
+import Title from './Title'
+
 export default {
     name: 'Proud',
     data() {
@@ -53,6 +53,7 @@ export default {
     props: {
     },
     components: {
+        Title,
     },
     methods:{
         test: () => {

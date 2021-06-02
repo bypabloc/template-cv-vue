@@ -2,9 +2,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <ins>
-                    Education
-                </ins>
+                <Title text="Education"/>
             </h5>
             <div class="row" v-for="(value, index) in education" :key="index">
                 <div class="col-3">
@@ -28,6 +26,8 @@
 
 <script>
 
+import Title from './Title'
+
 export default {
     name: 'Education',
     data() {
@@ -47,6 +47,7 @@ export default {
     props: {
     },
     components: {
+        Title,
     },
     methods:{
         test: () => {

@@ -2,9 +2,7 @@
     <div class="card mt-2">
         <div class="card-body">
             <h5 class="card-title">
-                <ins>
-                    Skills and Expertize
-                </ins>
+                <Title text="Skills and Expertize"/>
             </h5>
             <div class="row">
                 <div class="col-6" v-for="(value, index) in skills" :key="index">
@@ -26,6 +24,8 @@
 </template>
 
 <script>
+
+import Title from './Title'
 
 export default {
     name: 'Skills',
@@ -90,8 +90,13 @@ export default {
                 },
                 {
                     icon: 'fab fa-sass',
-                    text: 'SASS 3',
+                    text: 'SASS',
                     percentage: 20,
+                },
+                {
+                    icon: 'fas fa-fire',
+                    text: 'Firebase',
+                    percentage: 10,
                 },
             ],
         }
@@ -99,6 +104,7 @@ export default {
     props: {
     },
     components: {
+        Title,
     },
     methods:{
         test: () => {
