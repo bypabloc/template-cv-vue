@@ -46,5 +46,10 @@ export default {
             width: 90px;
         }
     }
+    @media (min-width: 151px) and (max-width: 214px) {
+        img {
+            width: 90px;
+        }
+    }
 
 </style>
