@@ -1,100 +1,46 @@
 <template>
-
+    <navbar/>
     <div class="container-fluid vh-100 d-flex">
-        <div :class="'row flex-grow-1 theme-bg-'+[theme]+'-600'">
+        <div :class="'row flex-grow-1 theme-bg--600'">
             <main class="row flex-fill"> 
                 <main class="col-12 flex-fill">
                     <div class="row p-3">
-                        <div :class="'col-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 col-xxl-3 theme-bg-'+[theme]+'-800 p-2'">
-                            <div class="col-12 flex-fill">
-
-                                <picture-profile class="pt-2" url="https://dibal-storage.s3.us-east-2.amazonaws.com/images/img_profile.png"/>
-                                <name/>
-
-                                <info/>
-                                <socials/>
-                                <hobbies/>
-                                <languages/>
-
-                            </div>
-                        </div>
-                        <div :class="'col-12 col-sm-12 col-md-7 col-lg-8 col-xl-9 col-xxl-9 theme-'+[theme]+'-100 p-2'">
-                            <iam/>
-                            <proud/>
-                            <education/>
-                            <skills/>
+                        <div :class="'col-12 col-sm-12 col-md-7 col-lg-8 col-xl-9 col-xxl-9 theme--100 p-2'">
+                            <router-view></router-view>
                         </div>
                     </div>
                 </main>
             </main>
         </div>
     </div>
-
-    <!-- <div id="wrapper" class="mh-100">
-        <div class="container">
-        </div>
-    </div> -->
-    <!-- <div class="container fluid fill-height" style="background-color: rgba(0,0,255,.1);">
-
-
-        <Home/>
-        
-    </div> -->
-
-
 </template>
 
 <script>
-
-// import Colors from './components/Colors'
-import name from './components/Name'
-import iam from './components/Iam'
-import proud from './components/Proud'
-import education from './components/Education'
-import skills from './components/Skills'
-import info from './components/Info'
-import socials from './components/Socials'
-import hobbies from './components/Hobbies'
-import PictureProfile from './components/Picture'
-import languages from './components/Languages'
+import Navbar from "./components/Navbar";
+import firebase from "./api/firebase";
+import store from "./store/index"
 
 export default {
-    name: 'App',
     components: {
-        // Colors,
-        skills,
-        education,
-        proud,
-        name,
-        iam,
-        info,
-        socials,
-        hobbies,
-        languages,
-        PictureProfile,
+        Navbar
     },
-    data() {
-        return {
-            theme: String,
-        }
+    methods: {
+        logout() {
+            firebase
+                .auth()
+                .signOut()
+                .then(() => {
+                    store.dispatch('fetchUser',null)
+                    alert('Successfully logged out');
+                    this.$router.push('/');
+                })
+                .catch(error => {
+                    alert(error.message);
+                    this.$router.push('/');
+                });
+        },
     },
-    mounted() {
-        this.theme = 'light-blue';
-    },
-}
+};
 </script>
-
 <style scoped>
-
-.vh-100 {
-    min-height: 100vh;
-}
-
-/* #wrapper {
-    background-color: rgba(0,0,255,.1);
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    display: block !important;
-}  */
 </style>
