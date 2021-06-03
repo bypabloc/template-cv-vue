@@ -52,8 +52,8 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    store.dispatch('fetchUser',null)
                     this.$router.replace({ name: "/" });
+                    store.dispatch('fetchUser',null)
                 });
         }
     }

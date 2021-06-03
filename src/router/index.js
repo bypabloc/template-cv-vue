@@ -41,19 +41,41 @@ router.beforeEach((to, from, next) => {
         if (firebase.auth().currentUser) {
             next();
         } else {
-            const user = localStorage.getItem('user')
-            if(user) {
-                const userData = JSON.parse(user)
-                store.dispatch('fetchUser',userData)
-            }else{
-                alert('You must be logged in to see this page');
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    store.dispatch('fetchUser',user)
+                    next();
+                } else {
+                    next({
+                        path: '/login',
+                    });
+                    // store.dispatch('fetchUser',null)
+                }
+            });
+        }
+
+        // if (to.name !== 'login' && !isAuthenticated) next({ name: 'Login' })
+    } else {
+        if(to.name === 'login'){
+            if (firebase.auth().currentUser) {
                 next({
-                    path: '/login',
+                    path: '/dashboard',
+                });
+            } else {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        store.dispatch('fetchUser',user)
+                        next({
+                            path: '/dashboard',
+                        });
+                    }else{
+                        next();
+                    }
                 });
             }
+        }else{
+            next();
         }
-    } else {
-      next();
     }
 });
 
