@@ -1,5 +1,4 @@
 import { createWebHistory, createRouter } from "vue-router";
-import firebase from "../api/firebase";
 import store from '../store'
 
 const routes = [
@@ -35,40 +34,25 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.authRequired)) {
-        if (firebase.auth().currentUser) {
+        
+        const isLogged = store.state.user.loggedIn;
+        if(isLogged){
             next();
-        } else {
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    store.dispatch('fetchUser',user)
-                    next();
-                } else {
-                    next({
-                        path: '/login',
-                    });
-                    // store.dispatch('fetchUser',null)
-                }
+        }else{
+            next({
+                path: '/login',
             });
         }
 
-        // if (to.name !== 'login' && !isAuthenticated) next({ name: 'Login' })
     } else {
-        if(to.name === 'login'){
-            if (firebase.auth().currentUser) {
+        if(to.name === 'login' || to.name === 'register'){
+            const isLogged = store.state.user.loggedIn;
+            if(isLogged){
                 next({
                     path: '/dashboard',
                 });
-            } else {
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        store.dispatch('fetchUser',user)
-                        next({
-                            path: '/dashboard',
-                        });
-                    }else{
-                        next();
-                    }
-                });
+            }else{
+                next();
             }
         }else{
             next();
