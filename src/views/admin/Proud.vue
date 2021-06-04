@@ -10,40 +10,49 @@
                     <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                 </div>
                 
-                <div class="col-11">
-                    <p v-if="!value.editing" v-on:click="value.editing = true">
-                        <strong>
-                            {{ value.title }}
-                        </strong>
-                        <br/>
-                        <small v-html="value.description">
-                        </small>
-                    </p>
-                    
+                <div class="row col-11">
+                    <div class="col-11">
+                        <p v-if="!value.editing" v-on:click="value.editing = true">
+                            <strong>
+                                {{ value.title }}
+                            </strong>
+                            <br/>
+                            <small v-html="value.description">
+                            </small>
+                        </p>
+                        
 
-                    <div v-if="value.editing">
-                        <input class="form-control" v-model="value.icon"
-                            @keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                        >
-                        <input class="form-control" v-model="value.title"
-                            @keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                        >
-                        <textarea 
-                            v-model="value.description"
-                            v-on:keyup="resizeTextarea($event)"
-                            v-on:keydown="resizeTextarea($event)"
-                            v-on:keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                            class="form-control" 
-                            placeholder="Descripcion de ti"
-                        ></textarea>
+                        <div class="row" v-if="value.editing">
+                            <input class="m-1 form-control" v-model="value.icon"
+                                placeholder="fas fa-icon"
+                                @keyup.enter.exact="value.editing = false"
+                                v-on:keyup.esc="value.editing = false"
+                            >
+                            <input class="m-1 form-control" v-model="value.title" 
+                                placeholder="Título"
+                                @keyup.enter.exact="value.editing = false"
+                                v-on:keyup.esc="value.editing = false"
+                            >
+                            <textarea 
+                                class="m-1 form-control" 
+                                v-model="value.description"
+                                v-on:keyup="resizeTextarea($event)"
+                                v-on:keydown="resizeTextarea($event)"
+                                v-on:keyup.enter.exact="value.editing = false"
+                                v-on:keyup.esc="value.editing = false"
+                                placeholder=""
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="col-1 d-flex align-items-center">
+                        <button type="button" v-on:click="remove(index)" :class="'btn theme-bg-'+[theme]+'-200'">
+                            <i :class="'fas fa-times'"></i>
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="pt-2 d-flex justify-content-center">
-                <button type="button" v-on:click="add" :class="'btn theme-'+[theme]+'-800'">
+                <button type="button" v-on:click="add" :class="'btn theme-bg-'+[theme]+'-200'">
                     <i :class="'fas fa-plus'"></i>
                 </button>
             </div>
@@ -94,13 +103,16 @@ export default {
         add() {
             this.prouds.push(
                 {
-                    icon: 'fas fa-user',
-                    title: 'Titulito',
-                    description: 'Descripcioncita por aqui.',
+                    icon: '',
+                    title: '',
+                    description: '',
                     editing: true,
                 },
             );
-        }
+        },
+        remove(i) {
+            this.prouds.splice(i,1);
+        },
     },
     created(){
     },
