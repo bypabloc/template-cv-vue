@@ -29,10 +29,12 @@
                     >
                         <i :class="[value.icon]+' col-2 theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
                         <input class="form-control col-8" v-model="value.icon"
+                            placeholder="Icon"
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
                         >
                         <input class="form-control m-1 col-10" v-model="value.text"
+                            placeholder="Skill"
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
                         >
@@ -163,7 +165,7 @@ export default {
             this.skills.push(
                 {
                     icon: '',
-                    text: 'Habilidad',
+                    text: '',
                     percentage: 0,
                     editing: true,
                 },

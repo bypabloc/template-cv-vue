@@ -23,6 +23,7 @@
                         v-if="value.editing"
                     >
                         <input class="form-control m-1 col-12" v-model="value.text"
+                            placeholder="Language"
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
                         >
@@ -85,7 +86,7 @@ export default {
             this.languages.push(
                 {
                     icon: '',
-                    text: 'Habilidad',
+                    text: '',
                     percentage: 0,
                     editing: true,
                 },
