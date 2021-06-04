@@ -11,11 +11,17 @@ const routes = [
         path: '/login',
         name: 'login',
         component: () => import('../views/auth/Login'),
+        meta: {
+            authRequired: false,
+        },
     },
     {
         path: '/register',
         name: 'register',
         component: () => import('../views/auth/Register'),
+        meta: {
+            authRequired: false,
+        },
     },
     {
         path: '/dashboard',
@@ -33,30 +39,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.authRequired)) {
-        
-        const isLogged = store.state.user.loggedIn;
-        if(isLogged){
-            next();
-        }else{
-            next({
-                path: '/login',
-            });
-        }
-
+    const isLogged = store.state.user.loggedIn;
+    const authRequired = to.matched.some(record => record.meta.authRequired);
+    if (authRequired && !isLogged){
+        next({ path: 'login' })
+    } else if ((!authRequired && isLogged) && (to.name === 'login' || to.name === 'register')){
+        next({ path: 'dashboard' })
     } else {
-        if(to.name === 'login' || to.name === 'register'){
-            const isLogged = store.state.user.loggedIn;
-            if(isLogged){
-                next({
-                    path: '/dashboard',
-                });
-            }else{
-                next();
-            }
-        }else{
-            next();
-        }
+        next()
     }
 });
 
