@@ -6,15 +6,33 @@
             </h5>
             <div class="row">
                 <div class="col-6" v-for="(value, index) in skills" :key="index">
-                    <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
-                    {{ value.text }}
-                    <div class="progress" style="height: 3px;">
-                        <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" 
-                            :style="{
-                                width: `${value.percentage}%`
-                            }"
-                        >
+                    <div class="" v-if="!value.editing" v-on:click="value.editing = true">
+                        <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 1rem;"></i>
+                        {{ value.text }}
+                        <div class="progress" style="height: 3px;">
+                            <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" 
+                                :style="{
+                                    width: `${value.percentage}%`
+                                }"
+                            >
+                            </div>
                         </div>
+                    </div>
+
+                    <div
+                        class="row" 
+                        v-if="value.editing"
+                    >
+                        <input class="form-control col-3" v-model="value.icon"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                        >
+                        <input class="form-control col-9" v-model="value.text"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                        >
+                        <input type="range" class="form-range" min="0" max="100" step="0.5" v-model="value.percentage">
+
                     </div>
                 </div>
             </div>

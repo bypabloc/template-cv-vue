@@ -9,7 +9,7 @@ export default createStore({
     plugins: debug ? [createLogger()] : [],
 
     state: {
-        theme: 'cyan',
+        theme: 'light-blue',
         user: {
             loggedIn: false,
             data: null,

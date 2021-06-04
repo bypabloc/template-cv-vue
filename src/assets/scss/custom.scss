@@ -140,10 +140,40 @@ $colors: (
             color: color-contrast($swatch_color);
             background-color: $swatch_color;
         }
+        .theme-#{$color_name}-#{$color_number} {
+            color: color-contrast($swatch_color);
+        }
+        .theme-#{$color_name}-#{$color_number}:link {
+            color: color-contrast($swatch_color);
+            font-weight: bold;
+        }
+        .theme-#{$color_name}-#{$color_number}:visited {
+            color: color-contrast($swatch_color);
+        }
+        .theme-#{$color_name}-#{$color_number}:hover {
+            color: color-contrast($swatch_color);
+        }
+        .theme-#{$color_name}-#{$color_number}:active {
+            color: color-contrast($swatch_color);
+        }
+
         .theme-bg-#{$color_name}-#{$color_number} {
             background-color: $swatch_color;
         }
+
         .theme-color-#{$color_name}-#{$color_number} {
+            color: $swatch_color;
+        }
+        .theme-color-#{$color_name}-#{$color_number}:link {
+            color: $swatch_color;
+        }
+        .theme-color-#{$color_name}-#{$color_number}:visited {
+            color: $swatch_color;
+        }
+        .theme-color-#{$color_name}-#{$color_number}:hover {
+            color: $swatch_color;
+        }
+        .theme-color-#{$color_name}-#{$color_number}:active {
             color: $swatch_color;
         }
 

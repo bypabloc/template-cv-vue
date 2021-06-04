@@ -42,6 +42,11 @@
                     </div>
                 </div>
             </div>
+            <div class="pt-2 d-flex justify-content-center">
+                <button type="button" v-on:click="add" :class="'btn theme-'+[theme]+'-800'">
+                    <i :class="'fas fa-plus'"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -71,6 +76,7 @@ export default {
                     editing: false,
                 },
             ],
+            name: 'Vue.js',
         }
     },
     computed: {
@@ -85,14 +91,20 @@ export default {
         Title,
     },
     methods:{
-        test: () => {
-            return "#";
+        add() {
+            this.prouds.push(
+                {
+                    icon: 'fas fa-user',
+                    title: 'Titulito',
+                    description: 'Descripcioncita por aqui.',
+                    editing: true,
+                },
+            );
         }
     },
     created(){
     },
     mounted() {
-        this.test();
     },
 }
 </script>

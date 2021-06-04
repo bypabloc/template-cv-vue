@@ -5,7 +5,8 @@
                 <Title :text="title"/>
             </h5>
             <div class="row">
-                    <div class="col-6" v-for="(value, index) in hobbies" :key="index">
+                <div class="col-6" v-for="(value, index) in hobbies" :key="index">
+                    <div class="" v-if="!value.editing" v-on:click="value.editing = true">
                         {{ value.text }}
                         <div class="progress" style="height: 3px;">
                             <div :class="'progress-bar theme-bg-'+[theme]+'-800'" role="progressbar" 
@@ -16,6 +17,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <div
+                        class="row" 
+                        v-if="value.editing"
+                    >
+                        <input class="form-control col-9" v-model="value.text"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                        >
+                        <input type="range" class="form-range" min="0" max="100" step="0.5" v-model="value.percentage">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
