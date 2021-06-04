@@ -1,44 +1,45 @@
-import firebase, { db } from './firebase'
+import { db } from './firebase'
 
 const proudsRef = db.ref('/prouds');
 const educationsRef = db.ref('/educations');
 const skillsRef = db.ref('/skills');
 
-const userEmail = firebase.user.email;
-console.log('userEmail',userEmail)
-
 export default {
-    getListAllSkills(){
-        const query = skillsRef.orderByChild('owner').equalTo(userEmail);
-        return query.once('value');
-    },
-    postSkill( text, percentage, icon ){
-        const id = skillsRef.push().key;
-        const skill = { text, percentage, icon, userEmail};
 
-        return skillsRef.child(id).set(skill).then(()=>skill);
-    },
-
-    getListAllProuds(){
+    getListAllProuds(userEmail){
         const query = proudsRef.orderByChild('owner').equalTo(userEmail);
         return query.once('value');
     },
-    postProud( title, description, icon ){
+    postProud( title, description, icon, userEmail ){
         const id = proudsRef.push().key;
         const proud = { title, description, icon, userEmail};
 
         return proudsRef.child(id).set(proud).then(()=>proud);
     },
+    deleteProud( proudId ){
+        return proudsRef.child(proudId).remove();
+    },
 
-    getListAllEducations(){
+    getListAllEducations(userEmail){
         const query = educationsRef.orderByChild('owner').equalTo(userEmail);
         return query.once('value');
     },
-    postEducation( title, description, start, end, finished ){
+    postEducation( title, description, start, end, finished, userEmail ){
         const id = educationsRef.push().key;
         const education = { title, description, start, end, finished, userEmail};
 
         return educationsRef.child(id).set(education).then(()=>education);
+    },
+
+    getListAllSkills(userEmail){
+        const query = skillsRef.orderByChild('owner').equalTo(userEmail);
+        return query.once('value');
+    },
+    postSkill( text, percentage, icon, userEmail ){
+        const id = skillsRef.push().key;
+        const skill = { text, percentage, icon, userEmail};
+
+        return skillsRef.child(id).set(skill).then(()=>skill);
     },
 }
 

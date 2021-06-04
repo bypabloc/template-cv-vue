@@ -18,6 +18,9 @@ app.mixin({
             event.target.style.height = (event.target.scrollHeight) + 'px'
         },
     },
+    created () {
+        document.title = "Template CV";
+    },
 })
 app.use(store)
 app.use(router)

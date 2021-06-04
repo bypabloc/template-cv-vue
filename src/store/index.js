@@ -1,6 +1,10 @@
 
 import { createStore, createLogger } from 'vuex'
 
+import state from './state'
+import mutations from './mutations'
+import actions from './actions'
+
 const debug = process.env.NODE_ENV !== 'production';
 
 // Create a new store instance.
@@ -14,7 +18,7 @@ export default createStore({
             loggedIn: false,
             data: null,
         },
-        ...{},
+        ...state,
     },
     getters: {
         user(state){
@@ -33,7 +37,7 @@ export default createStore({
             state.user.data = data;
             localStorage.setItem('user', JSON.stringify(data))
         },
-        ...{},
+        ...mutations,
     },
     actions: {
         fetchUser({ commit }, user) {
@@ -48,6 +52,6 @@ export default createStore({
                 commit("SET_USER", null);
             }
         },
-        ...{},
+        ...actions,
     },
 })
