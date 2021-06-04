@@ -1,39 +1,42 @@
-import { db } from './firebase'
+import firebase, { db } from './firebase'
 
 const proudsRef = db.ref('/prouds');
 const educationsRef = db.ref('/educations');
 const skillsRef = db.ref('/skills');
 
+const userEmail = firebase.user.email;
+console.log('userEmail',userEmail)
+
 export default {
-    getListAllSkills(userId = 1){
-        const query = skillsRef.orderByChild('owner').equalTo(userId);
+    getListAllSkills(){
+        const query = skillsRef.orderByChild('owner').equalTo(userEmail);
         return query.once('value');
     },
-    postSkill( text, percentage, icon, owner = 1){
+    postSkill( text, percentage, icon ){
         const id = skillsRef.push().key;
-        const skill = { text, percentage, icon, owner};
+        const skill = { text, percentage, icon, userEmail};
 
         return skillsRef.child(id).set(skill).then(()=>skill);
     },
 
-    getListAllProuds(userId = 1){
-        const query = proudsRef.orderByChild('owner').equalTo(userId);
+    getListAllProuds(){
+        const query = proudsRef.orderByChild('owner').equalTo(userEmail);
         return query.once('value');
     },
-    postProud( title, description, icon, owner = 1){
+    postProud( title, description, icon ){
         const id = proudsRef.push().key;
-        const proud = { title, description, icon, owner};
+        const proud = { title, description, icon, userEmail};
 
         return proudsRef.child(id).set(proud).then(()=>proud);
     },
 
-    getListAllEducations(userId = 1){
-        const query = educationsRef.orderByChild('owner').equalTo(userId);
+    getListAllEducations(){
+        const query = educationsRef.orderByChild('owner').equalTo(userEmail);
         return query.once('value');
     },
-    postEducation( title, description, start, end, finished, owner = 1 ){
+    postEducation( title, description, start, end, finished ){
         const id = educationsRef.push().key;
-        const education = { title, description, start, end, finished, owner};
+        const education = { title, description, start, end, finished, userEmail};
 
         return educationsRef.child(id).set(education).then(()=>education);
     },

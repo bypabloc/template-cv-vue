@@ -11,20 +11,17 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: () =>
-            import(/* webpackChunkName: "about" */ '../views/auth/Login'),
+        component: () => import('../views/auth/Login'),
     },
     {
         path: '/register',
         name: 'register',
-        component: () =>
-            import(/* webpackChunkName: "about" */ '../views/auth/Register'),
+        component: () => import('../views/auth/Register'),
     },
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: () =>
-            import(/* webpackChunkName: "dashboard" */ '../components/Dashboard'),
+        component: () => import('../views/admin/Dashboard'),
         meta: {
             authRequired: true,
         },

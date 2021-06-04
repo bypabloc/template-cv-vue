@@ -9,15 +9,21 @@ export default createStore({
     plugins: debug ? [createLogger()] : [],
 
     state: {
+        theme: 'cyan',
         user: {
             loggedIn: false,
-            data: null
-        }
+            data: null,
+        },
+        ...{},
     },
     getters: {
         user(state){
             return state.user
         },
+        theme(state){
+            return state.theme
+        },
+        ...{},
     },
     mutations: {
         SET_LOGGED_IN(state, value) {
@@ -27,6 +33,7 @@ export default createStore({
             state.user.data = data;
             localStorage.setItem('user', JSON.stringify(data))
         },
+        ...{},
     },
     actions: {
         fetchUser({ commit }, user) {
@@ -34,11 +41,13 @@ export default createStore({
             if (user) {
                 commit("SET_USER", {
                     displayName: user.displayName,
-                    email: user.email
+                    email: user.email,
+                    uid: user.uid,
                 });
             } else {
                 commit("SET_USER", null);
             }
         },
+        ...{},
     },
 })
