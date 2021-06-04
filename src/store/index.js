@@ -4,6 +4,7 @@ import { createStore, createLogger } from 'vuex'
 import state from './state'
 import mutations from './mutations'
 import actions from './actions'
+import getters from './getters'
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -27,7 +28,7 @@ export default createStore({
         theme(state){
             return state.theme
         },
-        ...{},
+        ...getters,
     },
     mutations: {
         SET_LOGGED_IN(state, value) {
