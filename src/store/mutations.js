@@ -49,18 +49,33 @@ export default {
         state.error = error
     },
 
-    [types.ADD_PROUD] (state, {id, proud} ){
-        state.prouds[id] = proud
+    [types.ADD_PROUD] (state, proud ){
+        state.prouds = [ ...Object.values(state.prouds) , proud]
+    },
+    [types.EDITING_PROUD] ( state, {id, status} ){
+        const prouds = Object.values(state.prouds)
+
+        console.log('mutations')
+
+        console.log('id',id)
+        console.log('prouds',prouds)
+        console.log('status',status)
+
+        const found = prouds.find(e => {
+            console.log('e',e)
+            console.log('e.id',e.id)
+            console.log('e.id',e.id)
+            e.id == id
+        });
+
+        console.log('found',found)
+
+        // state.prouds = Object.values(state.prouds)
+        //    .filter(proud => proud.id !== proud_id)
     },
     [types.REM_PROUD] ( state, proud_id ){
-        console.clear()
-
-        state.prouds = Object.entries(state.prouds).reduce( ( old, curr ) => {
-            if(proud_id!==curr[0]){
-                old[curr[0]] = curr[1]
-            }
-            return old;
-        },{})
+        state.prouds = Object.values(state.prouds)
+            .filter(proud => proud.id !== proud_id)
     },
 
     [types.ADD_EDUCATION] (state, { education }){

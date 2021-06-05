@@ -6,14 +6,14 @@
                 <Title :text="title"/>
             </h5>
             <span v-if="fetchingData">Cargando...</span>
-            <div v-else class="row" v-for="(value, index) in prouds" :key="index.id">
+            <div v-else class="row" v-for="(value, index) in prouds" :key="index">
                 <div class="col-1">
                     <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                 </div>
                 
                 <div class="row col-11">
                     <div class="col-11">
-                        <p v-if="!value.editing" v-on:click="value.editing = true">
+                        <p v-if="!value.editing" v-on:click="editing(value.id,true)">
                             <strong>
                                 {{ value.title }}
                             </strong>
@@ -26,27 +26,27 @@
                         <div class="row" v-if="value.editing">
                             <input class="m-1 form-control" v-model="value.icon"
                                 placeholder="fas fa-icon"
-                                @keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                @keyup.enter.exact="editing(value.id,false)"
+                                v-on:keyup.esc="editing(value.id,false)"
                             >
                             <input class="m-1 form-control" v-model="value.title" 
                                 placeholder="Título"
-                                @keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                @keyup.enter.exact="editing(value.id,false)"
+                                v-on:keyup.esc="editing(value.id,false)"
                             >
                             <textarea 
                                 class="m-1 form-control" 
                                 v-model="value.description"
                                 v-on:keyup="resizeTextarea($event)"
                                 v-on:keydown="resizeTextarea($event)"
-                                v-on:keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                v-on:keyup.enter.exact="editing(value.id,false)"
+                                v-on:keyup.esc="editing(value.id,false)"
                                 placeholder=""
                             ></textarea>
                         </div>
                     </div>
                     <div class="col-1 d-flex align-items-center">
-                        <button type="button" v-on:click="remove(index)" :class="'btn theme-bg-'+[theme]+'-200'">
+                        <button type="button" v-on:click="remove(value.id)" :class="'btn theme-bg-'+[theme]+'-200'">
                             <i :class="'fas fa-times'"></i>
                         </button>
                     </div>
@@ -109,6 +109,7 @@ export default {
         ...mapActions([
             'fetchProuds',
             'addProud',
+            'editingProud',
             'remProud',
         ]),
         add() {
@@ -133,8 +134,15 @@ export default {
             console.log('this.prouds',this.prouds)
             */
         },
+        editing(i,status) {
+            console.clear();
+            console.log('this.prouds',this.prouds)
+            console.log('{i,status}',{i,status});
+            this.editingProud({id:i,status});
+        },
         remove(i) {
             console.clear();
+            console.log('this.prouds',this.prouds)
             console.log('i',i);
             this.remProud(i);
         },

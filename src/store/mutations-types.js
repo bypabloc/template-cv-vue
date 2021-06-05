@@ -12,6 +12,7 @@ export const FETCH_EDUCATIONS_FAILURE = 'FETCH_EDUCATIONS_FAILURE';
 
 export const ADD_PROUD = 'ADD_PROUD';
 export const REM_PROUD = 'REM_PROUD';
+export const EDITING_PROUD = 'EDITING_PROUD';
 
 export const ADD_SKILL = 'ADD_SKILL';
 export const ADD_EDUCATION = 'ADD_EDUCATION';
