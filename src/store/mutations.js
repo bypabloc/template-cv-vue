@@ -50,28 +50,20 @@ export default {
     },
 
     [types.ADD_PROUD] (state, proud ){
-        state.prouds = [ ...Object.values(state.prouds) , proud]
+        state.prouds = [ ...Object.values(state.prouds) , {
+            ...proud,
+            'editing': true,
+        }]
     },
     [types.EDITING_PROUD] ( state, {id, status} ){
         const prouds = Object.values(state.prouds)
 
-        console.log('mutations')
-
-        console.log('id',id)
-        console.log('prouds',prouds)
-        console.log('status',status)
-
-        const found = prouds.find(e => {
-            console.log('e',e)
-            console.log('e.id',e.id)
-            console.log('e.id',e.id)
-            e.id == id
+        const index = prouds.findIndex(e => {
+            return e.id == id
         });
+        prouds[index]['editing'] = status;
 
-        console.log('found',found)
-
-        // state.prouds = Object.values(state.prouds)
-        //    .filter(proud => proud.id !== proud_id)
+        state.prouds = prouds;
     },
     [types.REM_PROUD] ( state, proud_id ){
         state.prouds = Object.values(state.prouds)

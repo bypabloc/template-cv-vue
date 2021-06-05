@@ -13,6 +13,22 @@ import '../src/assets/scss/custom.scss';
 
 const app = createApp(App)
 
+document.title = "Template CV";
+
+const user = localStorage.getItem('user')
+if(user){
+    const userData = JSON.parse(user)
+    store.dispatch('fetchUser',userData)
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            store.dispatch('fetchUser',user)
+        }
+    });
+}else{
+    store.dispatch('fetchUser',null)
+}
+
 app.mixin({  
     methods: {
         resizeTextarea (event) {
@@ -20,22 +36,6 @@ app.mixin({
         },
     },
     created () {
-        document.title = "Template CV";
-
-        const user = localStorage.getItem('user')
-        if(user){
-            const userData = JSON.parse(user)
-            store.dispatch('fetchUser',userData)
-
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    store.dispatch('fetchUser',user)
-                }
-            });
-        }else{
-            store.dispatch('fetchUser',null)
-        }
-
     },
 })
 app.use(store)

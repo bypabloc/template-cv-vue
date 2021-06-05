@@ -148,7 +148,6 @@ export default {
         },
     },
     created(){
-        this.fetchProuds()
     },
     mounted() {
     },
