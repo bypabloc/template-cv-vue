@@ -5,7 +5,8 @@
             <h5 class="card-title">
                 <Title :text="title"/>
             </h5>
-            <div class="row" v-for="(value, index) in prouds" :key="index">
+            <span v-if="fetchingData">Cargando...</span>
+            <div v-else class="row" v-for="(value, index) in prouds" :key="index.id">
                 <div class="col-1">
                     <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                 </div>
@@ -63,7 +64,7 @@
 
 <script>
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 import Title from './Title'
 
 export default {
@@ -71,6 +72,7 @@ export default {
     data() {
         return {
             title: "What am I proud of?",
+            /*
             prouds: [
                 {
                     icon: 'fas fa-chart-line',
@@ -85,14 +87,18 @@ export default {
                     editing: false,
                 },
             ],
-            name: 'Vue.js',
+            */
         }
     },
     computed: {
         // map `this.user` to `this.$store.getters.user`
         ...mapGetters({
             theme: "theme",
-        })
+        }),
+        ...mapState([
+            'prouds',
+            'fetchingData',
+        ]),
     },
     props: {
     },
@@ -100,21 +106,41 @@ export default {
         Title,
     },
     methods:{
+        ...mapActions([
+            'fetchProuds',
+            'addProud',
+            'remProud',
+        ]),
         add() {
-            this.prouds.push(
+            console.clear();
+            console.log('this.prouds',this.prouds)
+            this.addProud(
                 {
                     icon: '',
                     title: '',
                     description: '',
-                    editing: true,
                 },
             );
+
+            /*
+            this.addProud(
+                {
+                    icon: '',
+                    title: '',
+                    description: '',
+                },
+            );
+            console.log('this.prouds',this.prouds)
+            */
         },
         remove(i) {
-            this.prouds.splice(i,1);
+            console.clear();
+            console.log('i',i);
+            this.remProud(i);
         },
     },
     created(){
+        this.fetchProuds()
     },
     mounted() {
     },

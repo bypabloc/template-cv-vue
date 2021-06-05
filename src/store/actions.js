@@ -3,10 +3,10 @@ import API from '@/api'
 
 export default {
 
-    fetchProuds({commit}, {user}){
+    fetchProuds({commit}){
         commit(types.FETCH_PROUDS_REQUEST)
 
-        API.getListAllProuds(user)
+        API.getListAllProuds()
             .then(snap => commit(types.FETCH_PROUDS_SUCCESS, { prouds: snap.val() }))
             .catch(error => commit(types.FETCH_PROUDS_FAILURE, { error }) )
     },
@@ -28,9 +28,33 @@ export default {
     },
 
     addProud({commit}, {title, description, icon, user}){
+        console.log('action',{ title, description, icon });
         API.postProud(title, description, icon, user)
-            .then(proud => commit(types.ADD_PROUD, { proud } ) )
+            .then(proud => {
+                commit(types.ADD_PROUD, proud )
+            } )
     },
+    remProud({commit}, id ){
+        console.log('action',id);
+        try {
+            
+            API.remProud(id)
+            commit(types.REM_PROUD, id )
+        } catch (err) {
+            console.log(err)
+        }
+        /*
+        API.remProud(id)
+            .then(proud => {
+                console.log('.then(proud =>',proud)
+                commit(types.REM_PROUD, id )
+            } )
+            .catch(err => {
+                console.log(err)
+            } )
+            */
+    },
+
     addEducation({commit}, {title, description, start, end, finished, user}){
         API.postEducation(title, description, start, end, finished, user)
             .then(education => commit(types.ADD_EDUCATION, { education } ) )
