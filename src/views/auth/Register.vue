@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">Register</div>
                 <div class="card-body">
-                    <div v-if="error" class="alert alert-danger">{{error}}</div>
+                    <div v-if="user.error" class="alert alert-danger">{{user.error}}</div>
                     <form action="#" @submit.prevent="submit">
                         
                         <div class="mb-3 row">
@@ -72,8 +72,7 @@
 
 
 <script>
-import firebase from "../../api/firebase";
-import store from "../../store/index"
+import { mapState, mapActions } from "vuex";
 
 export default {
     data() {
@@ -83,27 +82,26 @@ export default {
                 email: "pacg1991@gmail.com",
                 password: "12345678",
             },
-            error: null
         };
     },
-    methods: {
+    computed: {
+        // map `this.theme` to `this.$store.getters.theme`
+        ...mapState([
+            'user',
+        ]),
+    },
+    methods:{
+        ...mapActions([
+            'register',
+        ]),
         submit() {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.form.email, this.form.password)
-                .then(data => {
-                    store.dispatch('fetchUser',data?.user)
-                    this.$router.replace({ name: "dashboard" });
-                    data.user
-                        .updateProfile({
-                            displayName: this.form.name
-                        })
-                        .then(() => {});
-                })
-                .catch(err => {
-                    this.error = err.message;
-                });
-        }
-    }
+            this.register(
+                {
+                    email: this.form.email,
+                    password: this.form.password,
+                },
+            );
+        },
+    },
 };
 </script>

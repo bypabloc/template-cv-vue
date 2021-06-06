@@ -15,12 +15,14 @@ export default {
         localStorage.removeItem('user')
     },
     [types.USER_LOGIN] (state, { displayName , email, uid } ){
+        state.user.error = null;
         state.user.data = { displayName , email, uid };
         state.user.loggedIn = true;
         localStorage.setItem('user', JSON.stringify({ displayName , email, uid }))
         router.push({ name: "dashboard" });
     },
     [types.USER_LOGOUT] (state){
+        state.user.error = null;
         state.user.data = null;
         state.user.loggedIn = null;
         // router.push('/')

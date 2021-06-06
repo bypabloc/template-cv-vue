@@ -12,6 +12,15 @@ export default {
                     commit(types.USER_LOGIN_FAILURE, err.message ) 
             } )
     },
+    register({ commit }, data ) {
+        API.register(data)
+            .then(res => {
+                commit( types.USER_LOGIN, res.user )
+            } )
+            .catch(err => {
+                    commit(types.USER_LOGIN_FAILURE, err.message ) 
+            } )
+    },
 
     fetchUser({ commit }, user) {
         commit("USER_LOGGED_IN", user !== null);
