@@ -1,8 +1,9 @@
 import { db, auth, timestamp } from './firebase'
-
 import store from '../store/index'
 
+// const now = timestamp.now()
 const now = timestamp.now()
+// time: Firestore.FieldValue.serverTimestamp()
 
 const proudsRef = db.collection('prouds');
 const educationsRef = db.collection('educations');
@@ -48,6 +49,25 @@ export default {
             updatedAt: now,
         });
         return res;
+    },
+    updateProud ( prouds ){
+        return new Promise( (resolver, rechazar ) => {
+            for (const i in prouds) {
+                const e = prouds[i];
+                const doc = proudsRef.doc(e.id);
+                doc.update({ 
+                    idx: e.idx,
+                })
+                .then( () => {
+                    if(i>=(prouds.length-1)){
+                        resolver();
+                    }
+                } )
+                .catch(() => {
+                    rechazar();
+                } )
+            }
+        })
     },
     remProud( proudId ){
         const res = proudsRef.doc(proudId).delete();

@@ -20,6 +20,7 @@ export const FETCH_EDUCATIONS_FAILURE = 'FETCH_EDUCATIONS_FAILURE';
 
 export const ADD_PROUD = 'ADD_PROUD';
 export const SAVE_PROUD = 'SAVE_PROUD';
+export const UPDATE_PROUD = 'UPDATE_PROUD';
 export const REM_PROUD = 'REM_PROUD';
 export const EDITING_PROUD = 'EDITING_PROUD';
 

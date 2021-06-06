@@ -61,23 +61,6 @@ export default {
                 }
             )
     },
-    
-    fetchEducations({commit}){
-        commit(types.FETCH_EDUCATIONS_REQUEST)
-
-        API.getListAllEducations()
-            .then(snap => commit(types.FETCH_EDUCATIONS_SUCCESS, { educations: snap.val() }))
-            .catch(error => commit(types.FETCH_EDUCATIONS_FAILURE, { error }) )
-    },
-    
-    fetchSkills({commit}){
-        commit(types.FETCH_SKILLS_REQUEST)
-
-        API.getListAllSkills()
-            .then(snap => commit(types.FETCH_SKILLS_SUCCESS, { skills: snap.val() }))
-            .catch(error => commit(types.FETCH_SKILLS_FAILURE, { error }) )
-    },
-
     addProud({commit}, {title, description, icon }){
         API.postProud(title, description, icon )
             .then(proud => {
@@ -111,6 +94,19 @@ export default {
                 )
         }
     },
+    updateProud({commit}, prouds ){
+        console.log('actions->updateProud')
+        API.updateProud( prouds )
+            .then( () => {
+                console.log('actions->then')
+                commit(types.UPDATE_PROUD, prouds )
+            } )
+            .catch(err => {
+                    console.log('actions->catch')
+                    console.log('error',err)
+                }
+            )
+    },
     editingProud({commit}, {id, status}){
         commit(types.EDITING_PROUD, {id, status} )
     },
@@ -122,6 +118,22 @@ export default {
             .catch(err => {
                 console.log(err)
             } )
+    },
+    
+    fetchEducations({commit}){
+        commit(types.FETCH_EDUCATIONS_REQUEST)
+
+        API.getListAllEducations()
+            .then(snap => commit(types.FETCH_EDUCATIONS_SUCCESS, { educations: snap.val() }))
+            .catch(error => commit(types.FETCH_EDUCATIONS_FAILURE, { error }) )
+    },
+    
+    fetchSkills({commit}){
+        commit(types.FETCH_SKILLS_REQUEST)
+
+        API.getListAllSkills()
+            .then(snap => commit(types.FETCH_SKILLS_SUCCESS, { skills: snap.val() }))
+            .catch(error => commit(types.FETCH_SKILLS_FAILURE, { error }) )
     },
 
     addEducation({commit}, {title, description, start, end, finished }){

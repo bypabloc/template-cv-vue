@@ -31,15 +31,15 @@
                                 class="m-1 form-control" 
                                 placeholder="fas fa-icon"
                                 v-model="value.icon"
-                                v-on:keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                v-on:keyup.enter.exact="value.editing = false; save(index);"
+                                v-on:keyup.esc="value.editing = false; save(index);"
                             >
                             <input 
                                 class="m-1 form-control" 
                                 placeholder="Título"
                                 v-model="value.title" 
-                                v-on:keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                v-on:keyup.enter.exact="value.editing = false; save(index);"
+                                v-on:keyup.esc="value.editing = false; save(index);"
                             >
                             <textarea 
                                 class="m-1 form-control" 
@@ -47,8 +47,8 @@
                                 v-model="value.description"
                                 v-on:keyup="resizeTextarea($event)"
                                 v-on:keydown="resizeTextarea($event)"
-                                v-on:keyup.enter.exact="value.editing = false"
-                                v-on:keyup.esc="value.editing = false"
+                                v-on:keyup.enter.exact="value.editing = false; save(index);"
+                                v-on:keyup.esc="value.editing = false; save(index);"
                             ></textarea>
                         </div>
                     </div>
@@ -88,22 +88,6 @@ export default {
         return {
             title: "What am I proud of?",
             proudsTemp: [],
-            /*
-            prouds: [
-                {
-                    icon: 'fas fa-chart-line',
-                    title: 'Having started with a StartUp from scratch until it is self-sustaining (Dibal.pe).',
-                    description: 'For having been the first programmer.<br/>For having fought to make it grow.<br/>For having fought against the pandemic and not giving up with all the cons that were presented to us.<br/>For my leadership in each new member of the team.',
-                    editing: false,
-                },
-                {
-                    icon: 'fas fa-graduation-cap',
-                    title: 'Have graduated as an Informatics Engineer.',
-                    description: 'The pride of having exceeded one goal, of so many, of my life.',
-                    editing: false,
-                },
-            ],
-            */
         }
     },
     computed: {
@@ -141,6 +125,7 @@ export default {
         ...mapActions([
             'fetchProuds',
             'saveProud',
+            'updateProud',
             'editingProud',
             'remProud',
         ]),
@@ -188,7 +173,7 @@ export default {
             const proudsOld = [...Object.values(this.prouds)];
             const proudsNews = this.proudsTemp;
 
-            const proudsReduce = proudsOld.reduce((old,curr) => {
+            const prouds = proudsOld.reduce((old,curr) => {
                 const itemIndex = proudsNews.findIndex(e => {
                     return e.id==curr.id
                 });
@@ -203,7 +188,9 @@ export default {
                 }
             },[]);
 
-            console.log('proudsReduce',proudsReduce);
+            console.clear()
+            console.log('prouds',prouds);
+            this.updateProud(prouds);
         },
     },
     created(){

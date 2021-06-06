@@ -51,8 +51,18 @@ export default {
     [types.FETCH_PROUDS_SUCCESS] (state, { prouds }){
         state.fetchingData = false
         state.error = null
-        state.prouds = Object.assign( {}, state.prouds, prouds )
-        // state.prouds = { ...prouds }
+
+        const proudsNews = Object.values(prouds).reduce((old,curr) => {
+            return [...old, {
+                id: curr.id,
+                icon: curr.icon,
+                title: curr.title,
+                description: curr.description,
+                idx: curr.idx,
+            }];
+        },[]);
+
+        state.prouds = proudsNews;
     },
     [types.FETCH_PROUDS_FAILURE] (state, { error }){
         state.fetchingData = false
@@ -106,6 +116,36 @@ export default {
             editing: false,
         };
         state.prouds = prouds;
+    },
+    [types.UPDATE_PROUD] ( state, prouds ){
+        console.log('mutations')
+
+        const proudsOld = Object.values(state.prouds)
+
+        console.log('proudsOld',proudsOld)
+        console.log('prouds to update',prouds)
+
+        const proudsNews = proudsOld.reduce((old,curr) => {
+
+            const item = prouds.find(e => {
+                return e.id==curr.id
+            });
+            console.log('item',item)
+
+            return [...old, {
+                id: item?.id ?? curr.id,
+                icon: item?.icon ?? curr.icon,
+                title: item?.title ?? curr.title,
+                description: item?.description ?? curr.description,
+                idx: item?.idx ?? curr.idx,
+            }];
+        },[]);
+        console.log('proudsNews',proudsNews)
+
+        const proudsSort = proudsNews.sort((a,b)=> (a.idx > b.idx ? 1 : -1))
+        console.log('proudsSort',proudsSort)
+
+        state.prouds = proudsNews;
     },
     [types.EDITING_PROUD] ( state, {id, status} ){
         const prouds = Object.values(state.prouds)
