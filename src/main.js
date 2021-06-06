@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import firebase from "./api/firebase"
+import { mapState } from "vuex";
 
 import 'bootstrap'
 
@@ -36,6 +37,12 @@ app.mixin({
         },
     },
     created () {
+    },
+    computed: {
+        // map `this.theme` to `this.$store.getters.theme`
+        ...mapState([
+            'theme',
+        ]),
     },
 })
 app.use(store)

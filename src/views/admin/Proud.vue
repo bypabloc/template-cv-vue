@@ -97,7 +97,6 @@ export default {
     computed: {
         // map `this.theme` to `this.$store.getters.theme`
         ...mapState([
-            'theme',
             'prouds',
             'fetchingData',
         ]),

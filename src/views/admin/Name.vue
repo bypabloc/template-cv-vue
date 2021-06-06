@@ -16,8 +16,6 @@
 
 <script>
 
-import { mapGetters } from "vuex";
-
 export default {
     name: 'Name',
     data() {
@@ -26,12 +24,6 @@ export default {
             slogan: "A challenge-loving web developer",
             title: "Who am I?",
         }
-    },
-    computed: {
-        // map `this.user` to `this.$store.getters.user`
-        ...mapGetters({
-            theme: "theme",
-        })
     },
     props: {
     },

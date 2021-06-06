@@ -26,7 +26,6 @@
 
 <script>
 
-import { mapGetters } from "vuex";
 import Title from './Title'
 
 export default {
@@ -59,26 +58,8 @@ export default {
             
         }
     },
-    computed: {
-        // map `this.user` to `this.$store.getters.user`
-        ...mapGetters({
-            theme: "theme",
-        })
-    },
-    props: {
-    },
     components: {
         Title,
-    },
-    methods:{
-        test: () => {
-            return "#";
-        }
-    },
-    created(){
-    },
-    mounted() {
-        this.test();
     },
 }
 </script>

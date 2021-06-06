@@ -9,34 +9,10 @@
 
 <script>
 
-import { mapGetters } from "vuex";
-
 export default {
     name: 'Picture',
-    data() {
-        return {
-        }
-    },
-    computed: {
-        // map `this.user` to `this.$store.getters.user`
-        ...mapGetters({
-            theme: "theme",
-        })
-    },
     props: {
         url: String,
-    },
-    components: {
-    },
-    methods:{
-        test: () => {
-            return "#";
-        }
-    },
-    created(){
-    },
-    mounted() {
-        this.test();
     },
 }
 </script>

@@ -97,7 +97,6 @@
 
 <script>
 
-import { mapGetters } from "vuex";
 import Title from './Title'
 import { DatePicker } from 'v-calendar';
 import { VueDraggableNext } from 'vue-draggable-next'
@@ -141,14 +140,6 @@ export default {
             },
             locale: 'es-ES',
         }
-    },
-    computed: {
-        // map `this.user` to `this.$store.getters.user`
-        ...mapGetters({
-            theme: "theme",
-        })
-    },
-    props: {
     },
     components: {
         Title,

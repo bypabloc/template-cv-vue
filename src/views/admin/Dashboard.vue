@@ -66,7 +66,6 @@ export default {
     computed: {
         // map `this.user` to `this.$store.getters.user`
         ...mapState([
-            'theme',
             'user',
         ]),
     },
