@@ -5,10 +5,10 @@
             <h5 class="card-title">
                 <Title :text="title"/>
             </h5>
-            <span v-if="fetchingData">Cargando...</span>
-            <div v-else class="row" v-for="(value, index) in proudsCopied" :key="index">
+            <loading v-if="fetchingData"/>
+            <div v-else class="row" v-for="(value, index) in proudsTemp" :key="index">
 
-                <div class="row col-11" v-if="!value.editing">
+                <div class="row col-11">
                     <div class="col-1">
                         <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                     </div>
@@ -22,29 +22,28 @@
                             </small>
                         </p>
                     </div>
-                </div>
-
-                <div class="col-11" v-if="value.editing">
-                    <input class="m-1 form-control" 
-                        v-model="value.icon"
-                        placeholder="fas fa-icon"
-                        v-on:keyup.enter.exact="value.editing = false"
-                        v-on:keyup.esc="value.editing = false"
-                    >
-                    <input class="m-1 form-control" v-model="value.title" 
-                        placeholder="Título"
-                        v-on:keyup.enter.exact="value.editing = false"
-                        v-on:keyup.esc="value.editing = false"
-                    >
-                    <textarea 
-                        class="m-1 form-control" 
-                        v-model="value.description"
-                        v-on:keyup="resizeTextarea($event)"
-                        v-on:keydown="resizeTextarea($event)"
-                        v-on:keyup.enter.exact="value.editing = false"
-                        v-on:keyup.esc="value.editing = false"
-                        placeholder=""
-                    ></textarea>
+                    <div class="col-11" v-if="value.editing">
+                        <input class="m-1 form-control" 
+                            v-model="value.icon"
+                            placeholder="fas fa-icon"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                        >
+                        <input class="m-1 form-control" v-model="value.title" 
+                            placeholder="Título"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                        >
+                        <textarea 
+                            class="m-1 form-control" 
+                            v-model="value.description"
+                            v-on:keyup="resizeTextarea($event)"
+                            v-on:keydown="resizeTextarea($event)"
+                            v-on:keyup.enter.exact="value.editing = false"
+                            v-on:keyup.esc="value.editing = false"
+                            placeholder=""
+                        ></textarea>
+                    </div>
                 </div>
 
                 <div class="col-1 d-flex align-items-center">
@@ -68,6 +67,7 @@
 
 import { mapState, mapActions } from "vuex";
 import Title from './Title'
+import Loading from '@/components/Loading'
 import * as _ from "lodash";
 
 export default {
@@ -75,7 +75,7 @@ export default {
     data() {
         return {
             title: "What am I proud of?",
-            proudsCopied: [],
+            proudsTemp: [],
             /*
             prouds: [
                 {
@@ -103,16 +103,30 @@ export default {
     },
     components: {
         Title,
+        Loading,
     },
     watch: {
-        fetchingData (newCount) {
-            if(!newCount){
-                this.proudsCopied = _.cloneDeep({...this.prouds});
+        fetchingData (newProuds) {
+            if(!newProuds){
+                const data = [...Object.values(this.prouds)].reduce(( old, curr ) => {
+                    return [...old, {
+                        id: curr?.id,
+                        icon: curr?.icon,
+                        description: curr?.description,
+                        title: curr?.title,
+                    }];
+                },[]);
+                this.proudsTemp = _.cloneDeep(data);
+
             }
         },
-        prouds (newCount) {
-            console.log('newCount',newCount)
+        /*
+        prouds (newProuds) {
+            if(newProuds){
+                this.proudsTemp = _.cloneDeep({...this.prouds});
+            }
         },
+        */
     },
     methods:{
         ...mapActions([
@@ -122,7 +136,35 @@ export default {
             'remProud',
         ]),
         add() {
-            console.clear();
+
+            const found = [...Object.values(this.proudsTemp)].find(e => {
+                return e.editing==true
+            });
+            console.log(found)
+
+            /*
+            this.toast({
+                icon: 'success',
+                title: 'Signed in successfully'
+            })
+            */
+
+            if(found){
+                this.swalFire({
+                    title: '',
+                    text: 'Tiene un item que no ha completado',
+                    type: 2,
+                })
+                return false;
+            }
+
+            this.proudsTemp = [ ...Object.values(this.proudsTemp) , {
+                icon: '',
+                title: '',
+                description: '',
+                editing: true,
+            }];
+            /*
             this.addProud(
                 {
                     icon: '',
@@ -130,6 +172,7 @@ export default {
                     description: '',
                 },
             );
+            */
         },
         update(id) {
             console.clear();
@@ -139,11 +182,15 @@ export default {
         editing(id,status) {
             this.editingProud({id,status});
         },
-        remove(i) {
+        remove(id) {
+                
             console.clear();
             console.log('this.prouds',this.prouds)
-            console.log('i',i);
-            this.remProud(i);
+            console.log('id',id);
+            this.remProud(id);
+
+            this.proudsTemp = Object.values(this.proudsTemp)
+                .filter(proud => proud.id !== id)
         },
     },
     created(){
