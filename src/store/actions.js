@@ -18,7 +18,7 @@ export default {
                 commit( types.USER_LOGIN, res.user )
             } )
             .catch(err => {
-                    commit(types.USER_LOGIN_FAILURE, err.message ) 
+                    commit(types.USER_REGISTER_FAILURE, err.message ) 
             } )
     },
 

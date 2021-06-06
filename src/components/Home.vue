@@ -8,9 +8,5 @@
 
 export default {
     name: 'Home',
-    data() {
-    },
-    methods: {
-    },
 };
 </script>

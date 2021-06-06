@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">Register</div>
                 <div class="card-body">
-                    <div v-if="user.error" class="alert alert-danger">{{user.error}}</div>
+                    <div v-if="user?.register?.error" class="alert alert-danger">{{ user.register.error }}</div>
                     <form action="#" @submit.prevent="submit">
                         
                         <div class="mb-3 row">

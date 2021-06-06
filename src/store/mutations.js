@@ -7,15 +7,23 @@ export default {
     [types.USER_LOGGED_IN] (state, value){
         state.user.loggedIn = value;
     },
+    [types.USER_REGISTER_FAILURE] (state, error ){
+        state.user.data = null;
+        state.user.loggedIn = null;
+        state.user.register.error = error;
+        localStorage.removeItem('user')
+    },
     [types.USER_LOGIN_FAILURE] (state, error ){
         state.user.data = null;
         state.user.loggedIn = null;
         state.user.error = error;
+        state.user.register.error = null;
 
         localStorage.removeItem('user')
     },
     [types.USER_LOGIN] (state, { displayName , email, uid } ){
         state.user.error = null;
+        state.user.register.error = null;
         state.user.data = { displayName , email, uid };
         state.user.loggedIn = true;
         localStorage.setItem('user', JSON.stringify({ displayName , email, uid }))
@@ -23,6 +31,7 @@ export default {
     },
     [types.USER_LOGOUT] (state){
         state.user.error = null;
+        state.user.register.error = null;
         state.user.data = null;
         state.user.loggedIn = null;
         // router.push('/')

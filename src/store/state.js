@@ -4,6 +4,9 @@ export default {
         loggedIn: false,
         data: null,
         error: null,
+        register: {
+            error: null
+        }
     },
 
     fetchingData: true,
