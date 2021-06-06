@@ -31,6 +31,11 @@ const routes = [
             authRequired: true,
         },
     },
+    { 
+        path: '/:pathMatch(.*)*', 
+        name: 'not-found', 
+        component: () => import('../components/404'),
+    },
 ]
 
 const router = createRouter({

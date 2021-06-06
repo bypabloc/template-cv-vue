@@ -1,10 +1,12 @@
-import { db, auth } from './firebase'
+import { db, auth, timestamp } from './firebase'
 
 import store from '../store/index'
 
+const now = timestamp.now()
+
 const proudsRef = db.collection('prouds');
-const educationsRef = db.collection('/educations');
-const skillsRef = db.collection('/skills');
+const educationsRef = db.collection('educations');
+const skillsRef = db.collection('skills');
 
 export default {
 
@@ -21,18 +23,30 @@ export default {
 
     getListAllProuds(){
         const userEmail = store.state.user.data.email;
-        const list = proudsRef.where("userEmail", "==", userEmail).get()
+        const list = proudsRef.where("userEmail", "==", userEmail).orderBy("idx", "asc").get()
 
         return list;
     },
-    postProud( { title, description, icon } ){
+    postProud( { title, description, icon, idx } ){
         const userEmail = store.state.user.data.email;
-        const proud = { title, description, icon, userEmail};
+        const proud = { 
+            title, 
+            description, 
+            icon, 
+            userEmail,
+            idx,
+            createdAt: now,
+            updatedAt: now,
+        };
 
         return proudsRef.add(proud);
     },
-    saveProud( { id, title, description, icon } ){
-        const res = proudsRef.doc(id).update({ title, description, icon });
+    saveProud( { id, title, description, icon, idx } ){
+        const res = proudsRef.doc(id).update({ 
+            title, description, icon,
+            idx,
+            updatedAt: now,
+        });
         return res;
     },
     remProud( proudId ){
