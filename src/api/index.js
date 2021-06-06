@@ -25,11 +25,15 @@ export default {
 
         return list;
     },
-    postProud( title, description, icon ){
+    postProud( { title, description, icon } ){
         const userEmail = store.state.user.data.email;
         const proud = { title, description, icon, userEmail};
 
         return proudsRef.add(proud);
+    },
+    saveProud( { id, title, description, icon } ){
+        const res = proudsRef.doc(id).update({ title, description, icon });
+        return res;
     },
     remProud( proudId ){
         const res = proudsRef.doc(proudId).delete();

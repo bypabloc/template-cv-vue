@@ -23,30 +23,36 @@
                         </p>
                     </div>
                     <div class="col-11" v-if="value.editing">
-                        <input class="m-1 form-control" 
-                            v-model="value.icon"
+                        <input 
+                            class="m-1 form-control" 
                             placeholder="fas fa-icon"
+                            v-model="value.icon"
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
                         >
-                        <input class="m-1 form-control" v-model="value.title" 
+                        <input 
+                            class="m-1 form-control" 
                             placeholder="Título"
+                            v-model="value.title" 
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
                         >
                         <textarea 
                             class="m-1 form-control" 
+                            placeholder=""
                             v-model="value.description"
                             v-on:keyup="resizeTextarea($event)"
                             v-on:keydown="resizeTextarea($event)"
                             v-on:keyup.enter.exact="value.editing = false"
                             v-on:keyup.esc="value.editing = false"
-                            placeholder=""
                         ></textarea>
                     </div>
                 </div>
 
-                <div class="col-1 d-flex align-items-center">
+                <div class="row col-1 d-flex align-items-center">
+                    <button type="button" v-if="value.editing" v-on:click="save(index)" :class="'btn theme-bg-'+[theme]+'-200'">
+                        <i :class="'fas fa-check'"></i>
+                    </button>
                     <button type="button" v-on:click="remove(value.id)" :class="'btn theme-bg-'+[theme]+'-200'">
                         <i :class="'fas fa-times'"></i>
                     </button>
@@ -108,30 +114,19 @@ export default {
     watch: {
         fetchingData (newProuds) {
             if(!newProuds){
-                const data = [...Object.values(this.prouds)].reduce(( old, curr ) => {
-                    return [...old, {
-                        id: curr?.id,
-                        icon: curr?.icon,
-                        description: curr?.description,
-                        title: curr?.title,
-                    }];
-                },[]);
-                this.proudsTemp = _.cloneDeep(data);
-
+                this.proudsTemp = _.cloneDeep({...this.prouds});
             }
         },
-        /*
         prouds (newProuds) {
             if(newProuds){
                 this.proudsTemp = _.cloneDeep({...this.prouds});
             }
         },
-        */
     },
     methods:{
         ...mapActions([
             'fetchProuds',
-            'addProud',
+            'saveProud',
             'editingProud',
             'remProud',
         ]),
@@ -174,10 +169,11 @@ export default {
             );
             */
         },
-        update(id) {
+        save(i) {
             console.clear();
-            console.log('this.prouds',this.prouds)
-            console.log('{id}',{id});
+            console.log('{i}',{i});
+            console.log('this.proudsTemp[i]',this.proudsTemp[i]);
+            this.saveProud( this.proudsTemp[i] );
         },
         editing(id,status) {
             this.editingProud({id,status});
@@ -185,7 +181,6 @@ export default {
         remove(id) {
                 
             console.clear();
-            console.log('this.prouds',this.prouds)
             console.log('id',id);
             this.remProud(id);
 

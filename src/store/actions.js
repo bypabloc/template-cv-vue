@@ -87,6 +87,30 @@ export default {
                 } )
             } )
     },
+    saveProud({commit}, saveProud ){
+        const id = saveProud?.id
+        if(id){
+            API.saveProud( saveProud )
+                .then(() => {
+                    commit(types.SAVE_PROUD, {
+                        ...saveProud,
+                        id,
+                    } )
+                } )
+        }else{
+            API.postProud( saveProud )
+                .then(proud => {
+                    commit(types.ADD_PROUD, {
+                        ...saveProud,
+                        id: proud.id,
+                    } )
+                } )
+                .catch(err => {
+                        console.log('error',err)
+                    }
+                )
+        }
+    },
     editingProud({commit}, {id, status}){
         commit(types.EDITING_PROUD, {id, status} )
     },

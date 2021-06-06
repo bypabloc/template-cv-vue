@@ -157,6 +157,10 @@ $colors: (
             color: color-contrast($swatch_color);
         }
 
+        .theme-border-#{$color_name}-#{$color_number} {
+            border: 6px solid $swatch_color !important;
+        }
+
         .theme-bg-#{$color_name}-#{$color_number} {
             background-color: $swatch_color;
         }

@@ -92,8 +92,20 @@ export default {
     [types.ADD_PROUD] (state, proud ){
         state.prouds = [ ...Object.values(state.prouds) , {
             ...proud,
-            'editing': true,
+            editing: false,
         }]
+    },
+    [types.SAVE_PROUD] ( state, proud ){
+        const prouds = Object.values(state.prouds)
+
+        const index = prouds.findIndex(e => {
+            return e.id == proud.id
+        });
+        prouds[index] = {
+            ...proud,
+            editing: false,
+        };
+        state.prouds = prouds;
     },
     [types.EDITING_PROUD] ( state, {id, status} ){
         const prouds = Object.values(state.prouds)
