@@ -8,18 +8,10 @@ const skillsRef = db.collection('/skills');
 
 export default {
 
-    /*
+    login({ email, password }){
+        return auth.signInWithEmailAndPassword(email, password);
+    },
 
-            firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                })
-                .catch(error => {
-                    alert(error.message);
-                    this.$router.push('/');
-                });
-    */
     logout(){
         return auth.signOut();
     },

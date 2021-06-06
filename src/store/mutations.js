@@ -7,11 +7,25 @@ export default {
     [types.USER_LOGGED_IN] (state, value){
         state.user.loggedIn = value;
     },
+    [types.USER_LOGIN_FAILURE] (state, error ){
+        state.user.data = null;
+        state.user.loggedIn = null;
+        state.user.error = error;
+
+        localStorage.removeItem('user')
+    },
+    [types.USER_LOGIN] (state, { displayName , email, uid } ){
+        state.user.data = { displayName , email, uid };
+        state.user.loggedIn = true;
+        localStorage.setItem('user', JSON.stringify({ displayName , email, uid }))
+        router.push({ name: "dashboard" });
+    },
     [types.USER_LOGOUT] (state){
         state.user.data = null;
         state.user.loggedIn = null;
         // router.push('/')
-        router.replace({ name: "/" });
+        localStorage.removeItem('user')
+        router.push({ name: "/" });
     },
     [types.USER] (state, data){
         state.user.data = data;

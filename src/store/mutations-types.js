@@ -1,5 +1,8 @@
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
+export const USER_REGISTER = 'USER_REGISTER';
 export const USER = 'USER';
 
 export const FETCH_PROUDS_REQUEST = 'FETCH_PROUDS_REQUEST';

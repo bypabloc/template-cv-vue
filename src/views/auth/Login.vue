@@ -7,8 +7,8 @@
                         Login
                     </div>
                     <div class="card-body">
-                        <div v-if="error" class="alert alert-danger">
-                            {{error}}
+                        <div v-if="user.error" class="alert alert-danger">
+                            {{user.error}}
                         </div>
                         <form action="#" @submit.prevent="submit">
                             <div class="mb-3">
@@ -47,8 +47,7 @@
 </template>
 
 <script>
-import firebase from "../../api/firebase";
-import store from "../../store/index"
+import { mapState, mapActions } from "vuex";
 
 export default {
     data() {
@@ -60,6 +59,26 @@ export default {
             error: null
         };
     },
+    computed: {
+        // map `this.theme` to `this.$store.getters.theme`
+        ...mapState([
+            'user',
+        ]),
+    },
+    methods:{
+        ...mapActions([
+            'login',
+        ]),
+        submit() {
+            this.login(
+                {
+                    email: this.form.email,
+                    password: this.form.password,
+                },
+            );
+        },
+    },
+    /*
     methods: {
         submit() {
             firebase
@@ -75,5 +94,6 @@ export default {
                 });
         }
     }
+    */
 };
 </script>

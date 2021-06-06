@@ -3,6 +3,16 @@ import API from '@/api'
 
 export default {
 
+    login({ commit }, data ) {
+        API.login(data)
+            .then(data => {
+                commit( types.USER_LOGIN, data.user )
+            } )
+            .catch(err => {
+                    commit(types.USER_LOGIN_FAILURE, err.message ) 
+            } )
+    },
+
     fetchUser({ commit }, user) {
         commit("USER_LOGGED_IN", user !== null);
         if (user) {

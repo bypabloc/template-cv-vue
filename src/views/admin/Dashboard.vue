@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import firebase from "../../api/firebase";
+import { mapState } from "vuex";
 
 import name from './Name'
 import iam from './Iam'
@@ -64,33 +63,16 @@ export default {
         return {
         };
     },
-    created(){
-        console.log('Dashboard');
-        const user = firebase.auth().currentUser;
-        console.log('user',user);
-    },
     computed: {
         // map `this.user` to `this.$store.getters.user`
-        ...mapGetters({
-            user: "user",
-            theme: "theme",
-        })
+        ...mapState([
+            'theme',
+            'user',
+        ]),
     },
     methods: {
         resizeTextarea (event) {
             event.target.style.height = (event.target.scrollHeight) + 'px'
-        },
-        login() {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(this.email, this.password)
-                .then(() => {
-                    alert('Successfully logged in');
-                    this.$router.push('/dashboard');
-                })
-                .catch(error => {
-                    alert(error.message);
-                });
         },
     },
 };
