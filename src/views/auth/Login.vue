@@ -56,7 +56,6 @@ export default {
                 email: "pacg1991@gmail.com",
                 password: "12345678",
             },
-            error: null
         };
     },
     computed: {
@@ -78,22 +77,5 @@ export default {
             );
         },
     },
-    /*
-    methods: {
-        submit() {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(this.form.email, this.form.password)
-                .then(data => {
-                    store.dispatch('fetchUser',data?.user)
-
-                    this.$router.replace({ name: "dashboard" });
-                })
-                .catch(err => {
-                    this.error = err.message;
-                });
-        }
-    }
-    */
 };
 </script>
