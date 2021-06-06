@@ -1,15 +1,21 @@
 export default {
+    theme: 'light-blue',
+    user: {
+        loggedIn: false,
+        data: null,
+    },
+
     fetchingData: true,
     error: null,
 
-    prouds: {/**
-        id: {
+    prouds: [/**
+        {
+            id: '',
             icon: 'icon',
             title: 'title',
             description: 'description',
-            editing: false,
         },
-    */},
-    educations: {},
-    skills: {},
+    */],
+    educations: [],
+    skills: [],
 }

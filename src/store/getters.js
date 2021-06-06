@@ -1,4 +1,10 @@
 export default {
+    user(state){
+        return state.user
+    },
+    theme(state){
+        return state.theme
+    },
     getListProuds: (state) => (proudId) => {
         return Object.values(state.prouds)
             .filter(list => list.id === proudId)

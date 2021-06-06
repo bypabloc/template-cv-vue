@@ -1,7 +1,22 @@
 import Vue from 'vue'
 import * as types from './mutations-types'
+import router from '@/router'
 
 export default {
+
+    [types.USER_LOGGED_IN] (state, value){
+        state.user.loggedIn = value;
+    },
+    [types.USER_LOGOUT] (state){
+        state.user.data = null;
+        state.user.loggedIn = null;
+        // router.push('/')
+        router.replace({ name: "/" });
+    },
+    [types.USER] (state, data){
+        state.user.data = data;
+        localStorage.setItem('user', JSON.stringify(data))
+    },
 
     // fetching prouds
     [types.FETCH_PROUDS_REQUEST] (state){

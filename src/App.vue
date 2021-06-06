@@ -7,28 +7,10 @@
 
 <script>
 import Navbar from "./components/Navbar";
-import firebase from "./api/firebase";
-import store from "./store/index"
 
 export default {
     components: {
         Navbar
-    },
-    methods: {
-        logout() {
-            firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                    store.dispatch('fetchUser',null)
-                    alert('Successfully logged out');
-                    this.$router.push('/');
-                })
-                .catch(error => {
-                    alert(error.message);
-                    this.$router.push('/');
-                });
-        },
     },
 };
 </script>

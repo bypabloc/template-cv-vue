@@ -12,8 +12,8 @@
                     <div class="col-1">
                         <i :class="[value.icon]+' theme-color-'+[theme]+'-800 p-2'" style="font-size: 2rem;"></i>
                     </div>
-                    <div class="col-11">
-                        <p v-if="!value.editing" v-on:click="value.editing = true">
+                    <div class="col-11" v-if="!value.editing">
+                        <p v-on:click="value.editing = true">
                             <strong>
                                 {{ value.title }}
                             </strong>
@@ -23,43 +23,28 @@
                         </p>
                     </div>
                 </div>
-                
-                <div class="row col-11" v-if="value.editing">
-                    <p v-if="!value.editing" v-on:click="value.editing = true">
-                        <strong>
-                            {{ value.title }}
-                        </strong>
-                        <br/>
-                        <small v-html="value.description">
-                        </small>
-                    </p>
-                    
-                    <!-- 
-                        v-on:change="update(value.id)"
-                        v-on:keyup="update({value})"
-                    -->
-                    <div class="row" v-if="value.editing">
-                        <input class="m-1 form-control" 
-                            v-model="value.icon"
-                            placeholder="fas fa-icon"
-                            v-on:keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                        >
-                        <input class="m-1 form-control" v-model="value.title" 
-                            placeholder="Título"
-                            v-on:keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                        >
-                        <textarea 
-                            class="m-1 form-control" 
-                            v-model="value.description"
-                            v-on:keyup="resizeTextarea($event)"
-                            v-on:keydown="resizeTextarea($event)"
-                            v-on:keyup.enter.exact="value.editing = false"
-                            v-on:keyup.esc="value.editing = false"
-                            placeholder=""
-                        ></textarea>
-                    </div>
+
+                <div class="col-11" v-if="value.editing">
+                    <input class="m-1 form-control" 
+                        v-model="value.icon"
+                        placeholder="fas fa-icon"
+                        v-on:keyup.enter.exact="value.editing = false"
+                        v-on:keyup.esc="value.editing = false"
+                    >
+                    <input class="m-1 form-control" v-model="value.title" 
+                        placeholder="Título"
+                        v-on:keyup.enter.exact="value.editing = false"
+                        v-on:keyup.esc="value.editing = false"
+                    >
+                    <textarea 
+                        class="m-1 form-control" 
+                        v-model="value.description"
+                        v-on:keyup="resizeTextarea($event)"
+                        v-on:keydown="resizeTextarea($event)"
+                        v-on:keyup.enter.exact="value.editing = false"
+                        v-on:keyup.esc="value.editing = false"
+                        placeholder=""
+                    ></textarea>
                 </div>
 
                 <div class="col-1 d-flex align-items-center">
@@ -83,7 +68,6 @@
 
 import { mapState, mapActions } from "vuex";
 import Title from './Title'
-
 import * as _ from "lodash";
 
 export default {
@@ -122,20 +106,14 @@ export default {
         Title,
     },
     watch: {
-        fetchingData (newCount, oldCount) {
+        fetchingData (newCount) {
             if(!newCount){
-                console.log(`newCount`,newCount)
-                console.log(`oldCount`,oldCount)
-
-                console.log(`...this.prouds`,{...this.prouds})
-
                 this.proudsCopied = _.cloneDeep({...this.prouds});
-                
-                // this.proudsCopied = JSON.parse(JSON.stringify({...Object.values(this.prouds)}));
-                // console.log(`this.prouds.slice()`,{...Object.values(this.prouds)})
-
             }
-        }
+        },
+        prouds (newCount) {
+            console.log('newCount',newCount)
+        },
     },
     methods:{
         ...mapActions([

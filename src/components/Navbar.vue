@@ -17,7 +17,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
-                                    <a class="dropdown-item" href="#" @click.prevent="signOut">Sign out</a>
+                                    <a class="dropdown-item" href="#" @click.prevent="fetchLogout">Sign out</a>
                                 </li>
                             </ul>
                         </li>
@@ -41,9 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-import firebase from '../api/firebase'
-import store from "../store/index"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
     computed: {
@@ -54,15 +52,9 @@ export default {
         })
     },
     methods: {
-        signOut() {
-            firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                    this.$router.replace({ name: "/" });
-                    store.dispatch('fetchUser',null)
-                });
-        }
+        ...mapActions([
+            'fetchLogout',
+        ]),
     }
 };
 </script>

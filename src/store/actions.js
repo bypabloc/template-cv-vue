@@ -3,6 +3,26 @@ import API from '@/api'
 
 export default {
 
+    fetchUser({ commit }, user) {
+        commit("USER_LOGGED_IN", user !== null);
+        if (user) {
+            commit("USER", {
+                displayName: user.displayName,
+                email: user.email,
+                uid: user.uid,
+            });
+        } else {
+            commit("USER", null);
+        }
+    },
+
+    fetchLogout({commit} ){
+        API.logout()
+            .then(() => {
+                commit( types.USER_LOGOUT )
+            } )
+    },
+
     fetchProuds({commit}){
         commit(types.FETCH_PROUDS_REQUEST)
 
@@ -18,7 +38,6 @@ export default {
                 commit(types.FETCH_PROUDS_SUCCESS, { prouds: prouds })
             })
             .catch(error => {
-                    console.log('error',error)
                     commit(types.FETCH_PROUDS_FAILURE, { error }) 
                 }
             )
@@ -41,7 +60,6 @@ export default {
     },
 
     addProud({commit}, {title, description, icon }){
-        console.log('action',{ title, description, icon });
         API.postProud(title, description, icon )
             .then(proud => {
                 commit(types.ADD_PROUD, {
@@ -51,15 +69,11 @@ export default {
             } )
     },
     editingProud({commit}, {id, status}){
-        console.log('actions')
-        console.log('id', id )
-        console.log('status', status )
         commit(types.EDITING_PROUD, {id, status} )
     },
     remProud({commit}, id ){
         API.remProud(id)
-            .then(proud => {
-                console.log('.then(proud =>',proud)
+            .then(() => {
                 commit(types.REM_PROUD, id )
             } )
             .catch(err => {

@@ -1,4 +1,5 @@
-import { db } from './firebase'
+import { db, auth } from './firebase'
+
 import store from '../store/index'
 
 const proudsRef = db.collection('prouds');
@@ -7,9 +8,23 @@ const skillsRef = db.collection('/skills');
 
 export default {
 
-    getListAllProuds(){
+    /*
 
-        console.clear()
+            firebase
+                .auth()
+                .signOut()
+                .then(() => {
+                })
+                .catch(error => {
+                    alert(error.message);
+                    this.$router.push('/');
+                });
+    */
+    logout(){
+        return auth.signOut();
+    },
+
+    getListAllProuds(){
         const userEmail = store.state.user.data.email;
         const list = proudsRef.where("userEmail", "==", userEmail).get()
 
@@ -22,9 +37,7 @@ export default {
         return proudsRef.add(proud);
     },
     remProud( proudId ){
-        console.log('API',proudId);
         const res = proudsRef.doc(proudId).delete();
-        console.log('res',res);
         return res;
     },
 
