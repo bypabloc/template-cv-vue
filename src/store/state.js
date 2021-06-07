@@ -6,7 +6,20 @@ export default {
         error: null,
         register: {
             error: null
-        }
+        },
+    },
+
+    data: {
+        config: {
+            data: {
+                img : null,
+            },
+            fetchingData: false,
+            err: null,
+        },
+        prouds: [],
+        educations: [],
+        skills: [],
     },
 
     fetchingData: true,

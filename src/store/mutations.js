@@ -42,6 +42,39 @@ export default {
         state.user.data = data;
         localStorage.setItem('user', JSON.stringify(data))
     },
+    [types.FETCH_CONFIG_REQUEST] (state){
+        state.data.config.fetchingData = true;
+        state.data.config.err = null;
+    },
+    [types.FETCH_CONFIG_SUCCESS] (state, data ){
+        state.data.config = {
+            fetchingData: false,
+            err: null,
+            data,
+        }
+    },
+    [types.FETCH_CONFIG_FAILURE] (state, { error }){
+        state.data.config = {
+            fetchingData: false,
+            err: error,
+            data: null,
+        }
+    },
+    [types.CREATE_CONFIG] (state, { id }){
+        state.data.config = {
+            fetchingData: false,
+            data: {
+                id,
+                img: null,
+            },
+        }
+    },
+    [types.SAVE_CONFIG] (state, data ){
+        state.data.config.fetchingData = false;
+        for (const key in data) {
+            state.data.config.data[key] = data[key];
+        }
+    },
 
     // fetching prouds
     [types.FETCH_PROUDS_REQUEST] (state){

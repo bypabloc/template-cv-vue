@@ -15,6 +15,7 @@ export default {
     register({ commit }, data ) {
         API.register(data)
             .then(res => {
+                API.createConfig(data.email)
                 commit( types.USER_LOGIN, res.user )
             } )
             .catch(err => {
@@ -40,6 +41,66 @@ export default {
             .then(() => {
                 commit( types.USER_LOGOUT )
             } )
+    },
+
+    fetchConfig({commit}){
+        commit(types.FETCH_CONFIG_REQUEST)
+
+        console.log('actions->fetchConfig')
+
+        API.getConfig()
+            .then( snap => { 
+                const configs = [];
+                snap.forEach(data => {
+                    configs.push({
+                        id: data.id,
+                        ...data.data(),
+                    });
+                });
+                commit( types.FETCH_CONFIG_SUCCESS, configs[0] )
+            })
+            .catch( err => {
+                commit( types.FETCH_CONFIG_FAILURE, err.message ) 
+            })
+    },
+    createConfig({commit}, email){
+        API.createConfig(email)
+            .then( res => {
+                commit(types.CREATE_CONFIG, res )
+            } )
+            .catch(err => {
+                console.log('err',err)
+            })
+    },
+    saveConfig({commit}, data ){
+
+        const dataNew = Object.keys(data).reduce((old,curr) => {
+            return {
+                ...old,
+                ...{
+                    [curr]: data[curr],
+                }
+            };
+        },{});
+
+        API.saveConfig( dataNew )
+            .then( () => {
+                commit(types.SAVE_CONFIG, dataNew )
+            } )
+            .catch(err => {
+                console.log('err',err)
+            })
+    },
+    saveImg({commit}, { img } ){
+        commit == 1;
+        API.saveImg( { img } )
+            .then( res => {
+                this.dispatch('saveConfig', {img:res.img});
+                // saveConfig({img:res})
+            } )
+            .catch(err => {
+                console.error('err',err)
+            })
     },
 
     fetchProuds({commit}){

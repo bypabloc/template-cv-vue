@@ -1,10 +1,13 @@
-import { db, auth, timestamp } from './firebase'
+import { db, auth, storage, timestamp } from './firebase'
 import store from '../store/index'
 
 // const now = timestamp.now()
 const now = timestamp.now()
 // time: Firestore.FieldValue.serverTimestamp()
 
+const storageProfile = storage.ref().child('profile_img/');
+
+const configRef = db.collection('config');
 const proudsRef = db.collection('prouds');
 const educationsRef = db.collection('educations');
 const skillsRef = db.collection('skills');
@@ -20,6 +23,47 @@ export default {
 
     logout(){
         return auth.signOut();
+    },
+
+    getConfig(){
+        const userEmail = store.state.user.data.email;
+        return configRef.where("userEmail", "==", userEmail).get();
+    },
+    createConfig( userEmail ){
+        const config = { 
+
+            img: null, 
+
+            userEmail,
+            createdAt: now,
+            updatedAt: now,
+        };
+        return configRef.add(config);
+    },
+    saveConfig( data ){
+        return configRef.doc(store.state.data.config.data.id).update({ 
+            ...data,
+            updatedAt: now,
+        });
+    },
+    saveImg( { img } ){
+        const userEmail = store.state.user.data.email;
+        return new Promise( (resolver, rechazar ) => {
+            const spaceRef = storageProfile.child(`/${userEmail}.png`);
+            spaceRef.putString(img, 'data_url')
+                .then( () => {
+                    spaceRef.getDownloadURL()
+                        .then( (res) => {
+                            resolver({ img:res });
+                        } )
+                        .catch(err => {
+                            rechazar(err.message);
+                        } )
+                } )
+                .catch(err => {
+                    rechazar(err);
+                } )
+        })
     },
 
     getListAllProuds(){

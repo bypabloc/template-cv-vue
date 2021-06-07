@@ -8,6 +8,7 @@
                             <div class="col-12">
 
                                 <picture-profile class="pt-2" url="https://dibal-storage.s3.us-east-2.amazonaws.com/images/img_profile.png"/>
+
                                 <name/>
 
                                 <info/>
@@ -31,8 +32,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 import name from './Name'
 import iam from './Iam'
 import proud from './Proud'
@@ -58,16 +57,6 @@ export default {
         hobbies,
         languages,
         PictureProfile,
-    },
-    data() {
-        return {
-        };
-    },
-    computed: {
-        // map `this.user` to `this.$store.getters.user`
-        ...mapState([
-            'user',
-        ]),
     },
     methods: {
         resizeTextarea (event) {

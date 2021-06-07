@@ -30,7 +30,12 @@ const routes = [
         meta: {
             authRequired: true,
         },
-    },
+    },{
+        path: "/cv/:email", // <-- notice the colon
+        name: "cv",
+        component: () => import('../views/template/Dashboard'),
+        props: route => ({ query: route.query.email })
+     },
     { 
         path: '/:pathMatch(.*)*', 
         name: 'not-found', 
