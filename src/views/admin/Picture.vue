@@ -4,8 +4,8 @@
         <div class="img-fluid mx-auto d-block container m-5">
             <loading v-if="data?.config?.fetchingData"/>
             <div v-else>
-                <img v-if="data?.config?.data?.img && !editing" class="img-fluid mx-auto d-block img-thumbnail" :src="data?.config?.data?.img"/>
-                <img v-else-if="image" class="img-fluid mx-auto d-block img-thumbnail" :src="image"/>
+                <img v-if="image" class="img-fluid mx-auto d-block img-thumbnail" :src="image"/>
+                <img v-else-if="data?.config?.data?.img && !data?.config?.fetchingData" class="img-fluid mx-auto d-block img-thumbnail" :src="data?.config?.data?.img"/>
                 <img v-else class="img-fluid mx-auto d-block img-thumbnail" src="@/assets/profile_not_fount.png"/>
                 <!-- <img class="img-fluid mx-auto d-block img-thumbnail" src="../../assets/profile_not_fount.png"/> -->
                 <button v-if="editing" type="button" @click="save" :class="'save btn theme-color-'+[theme]+'-200'">
@@ -14,7 +14,7 @@
                         <i class="fas fa-plus fa-stack-1x " :class="'btn theme-color-'+[theme]+'-200'"></i>
                     </span>
                 </button>
-                <button v-if="editing" type="button" @click="cancel" :class="'del btn theme-color-'+[theme]+'-200'">
+                <button v-if="data?.config?.data?.img || editing" type="button" @click="cancel" :class="'del btn theme-color-'+[theme]+'-200'">
                     <span class="fa-stack"> 
                         <i class="fas fa-times fa-stack-2x"></i>
                         <i class="fas fa-plus fa-stack-1x " :class="'btn theme-color-'+[theme]+'-200'"></i>
@@ -67,6 +67,10 @@ export default {
         ]),
         onFileChange(e) {
             console.log('this.data',this.data)
+            console.log('this.data?.config?.data?.img',this.data?.config?.data?.img)
+            console.log('this.data?.config?.fetchingData',this.data?.config?.fetchingData)
+            
+            
             const files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;
@@ -83,13 +87,16 @@ export default {
         },
         save() {
             this.saveImg({img:this.image})
-            this.image = null;
             this.editing = false;
         },
         cancel() {
-            console.log('image',this.image)
-            this.image = null;
+            if(this.image){
+                this.image = null;
+            }else{
+                console.log('cancel')
+            }
             this.editing = false;
+            console.log('image',this.image)
         },
     },
     created(){

@@ -1,6 +1,6 @@
 <template>
     <navbar/>
-    <div :class="'col-12 theme--100'">
+    <div :class="'col-12 theme--100 h-100'">
         <router-view></router-view>
     </div>
 </template>

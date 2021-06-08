@@ -9,6 +9,10 @@ const firebaseApp = firebase.initializeApp(settings)
 export const db = firebaseApp.firestore()
 export const storage = firebaseApp.storage()
 export const auth = firebaseApp.auth()
+export const providerGoogle = new firebase.auth.GoogleAuthProvider()
+  
+export const authProvider = new firebase.auth
+export const useDeviceLanguage = new firebase.auth().useDeviceLanguage()
 
 export const timestamp = firebase.firestore.Timestamp
 export const runTransaction = db.runTransaction
