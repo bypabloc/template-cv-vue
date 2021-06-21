@@ -17,6 +17,45 @@ export default {
     login({ email, password }){
         return auth.signInWithEmailAndPassword(email, password);
     },
+    loginWithGoogle({ displayName, email }){
+        return new Promise( (resolver, rechazar ) => {
+
+            const config = { 
+                img: null, 
+                email,
+                displayName,
+                nickname: email,
+                createdAt: now,
+                updatedAt: now,
+            };
+            configRef.where("email", "==", email).get()
+                .then( data => {
+                    if(data.empty){
+                        configRef.add(config)
+                            .then( () => {
+                                resolver( config );
+                            } )
+                            .catch(err => {
+                                rechazar( err );
+                            } );
+                    }else{
+                        const info = [];
+                        data.forEach(data => {
+                            info.push({
+                                id: data.id,
+                                ...data.data(),
+                            });
+                        });
+                        resolver( config );
+                    }
+                } )
+                .catch(err => {
+                    console.log('err',err)
+                    rechazar( err );
+                } );
+
+        })
+    },
     register({ email, password }){
         return auth.createUserWithEmailAndPassword(email, password);
     },
@@ -25,9 +64,13 @@ export default {
         return auth.signOut();
     },
 
+    // var faker = require('faker');
+
     getConfig(){
-        const userEmail = store.state.user.data.email;
-        return configRef.where("userEmail", "==", userEmail).get();
+        const nickname = store.state.user.data.nickname;
+        console.log('getConfig');
+        console.log('nickname',nickname);
+        return configRef.where("nickname", "==", nickname).get();
     },
     createConfig( userEmail ){
         const config = { 
@@ -35,6 +78,7 @@ export default {
             img: null, 
 
             userEmail,
+            // nickname,
             createdAt: now,
             updatedAt: now,
         };

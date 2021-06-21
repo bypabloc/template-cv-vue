@@ -1,5 +1,5 @@
 <template>
-    <nav :class="'navbar navbar-expand-lg theme-'+[theme]+'-800'">
+    <nav :class="'row navbar navbar-expand-lg theme-'+[theme]+'-800'">
         <div class="container-fluid">
             <router-link to="/" :class="'navbar-brand theme-color-'+[theme]+'-200'">Template CV</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,12 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
-                                    <a class="dropdown-item" href="#" @click.prevent="fetchLogout">Sign out</a>
+                                    <router-link to="config"
+                                        :class="'dropdown-item theme-color-'+[theme]+'-700'"
+                                    >Config</router-link>
+                                </li>
+                                <li>
+                                    <a :class="'dropdown-item theme-color-'+[theme]+'-700'" href="#" @click.prevent="fetchLogout">Sign out</a>
                                 </li>
                             </ul>
                         </li>

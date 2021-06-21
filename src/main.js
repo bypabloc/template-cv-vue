@@ -22,11 +22,12 @@ document.title = "Template CV";
 const user = localStorage.getItem('user')
 if(user){
     const userData = JSON.parse(user)
+    console.log('userData',userData)
     store.dispatch('fetchUser',userData)
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            store.dispatch('fetchUser',user)
+            store.dispatch('fetchUser',userData)
         }
     });
 }else{

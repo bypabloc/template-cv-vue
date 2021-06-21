@@ -5,6 +5,7 @@ node_modules
 src/api/settings.js
 
 # local env files
+.env
 .env.local
 .env.*.local
 

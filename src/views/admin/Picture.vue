@@ -61,7 +61,7 @@ export default {
     },
     methods:{
         ...mapActions([
-            'fetchConfig',
+            // 'fetchConfig',
             'saveImg',
             'remConfig',
         ]),
@@ -99,9 +99,11 @@ export default {
             console.log('image',this.image)
         },
     },
+    /*
     created(){
         this.fetchConfig()
     },
+    */
 }
 </script>
 

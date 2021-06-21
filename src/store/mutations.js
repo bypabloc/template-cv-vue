@@ -21,12 +21,15 @@ export default {
 
         localStorage.removeItem('user')
     },
-    [types.USER_LOGIN] (state, { displayName , email, uid } ){
+    [types.USER_LOGIN] (state, { displayName, email, img, nickname } ){
+        const data = { displayName, email, img, nickname };
+        state.data.config.data = data;
         state.user.error = null;
         state.user.register.error = null;
-        state.user.data = { displayName , email, uid };
+        state.user.data = data;
         state.user.loggedIn = true;
-        localStorage.setItem('user', JSON.stringify({ displayName , email, uid }))
+        localStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem('config', JSON.stringify(data))
         router.push({ name: "dashboard" });
     },
     [types.USER_LOGOUT] (state){
@@ -40,6 +43,7 @@ export default {
     },
     [types.USER] (state, data){
         state.user.data = data;
+        state.data.config.data = data;
         localStorage.setItem('user', JSON.stringify(data))
     },
     [types.FETCH_CONFIG_REQUEST] (state){

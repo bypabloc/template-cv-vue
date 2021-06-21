@@ -12,6 +12,18 @@ export default {
                     commit(types.USER_LOGIN_FAILURE, err.message ) 
             } )
     },
+    loginWithGoogle({ commit }, { displayName, email } ) {
+        // displayName: 'Pablo Contreras',
+        // email: 'pacg1991@gmail.com',
+        API.loginWithGoogle({ displayName, email })
+            .then(data => {
+                commit( types.USER_LOGIN, data )
+                // this.dispatch('fetchConfig');
+            } )
+            .catch(err => {
+                commit(types.USER_LOGIN_FAILURE, err.message ) 
+            } )
+    },
     register({ commit }, data ) {
         API.register(data)
             .then(res => {
@@ -25,11 +37,13 @@ export default {
 
     fetchUser({ commit }, user) {
         commit("USER_LOGGED_IN", user !== null);
+        console.log('fetchUser',user)
         if (user) {
             commit("USER", {
                 displayName: user.displayName,
                 email: user.email,
-                uid: user.uid,
+                img: user.img,
+                nickname: user.nickname,
             });
         } else {
             commit("USER", null);
@@ -45,12 +59,10 @@ export default {
 
     fetchConfig({commit}){
         commit(types.FETCH_CONFIG_REQUEST)
-
-        console.log('actions->fetchConfig')
-
         API.getConfig()
             .then( snap => { 
                 const configs = [];
+                console.log('snap',snap);
                 snap.forEach(data => {
                     configs.push({
                         id: data.id,
@@ -117,8 +129,9 @@ export default {
                 });
                 commit(types.FETCH_PROUDS_SUCCESS, { prouds: prouds })
             })
-            .catch(error => {
-                    commit(types.FETCH_PROUDS_FAILURE, { error }) 
+            .catch(err => {
+                console.log('err',err)
+                    commit(types.FETCH_PROUDS_FAILURE, { err }) 
                 }
             )
     },

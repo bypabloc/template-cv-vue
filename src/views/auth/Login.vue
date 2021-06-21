@@ -87,7 +87,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 
-import { providerGoogle, auth, authProvider } from '../../api/firebase'
+import { /*providerGoogle,*/ auth, authProvider } from '../../api/firebase'
 import firebase from 'firebase/app'
 
 import { VueTelInput } from 'vue3-tel-input'
@@ -146,51 +146,63 @@ export default {
     methods:{
         ...mapActions([
             'login',
+            'loginWithGoogle',
         ]),
         submit() {
+            this.loginWithGoogle({
+                displayName: 'Pablo Contreras',
+                email: 'pacg1991@gmail.com',
+            });
+            /*
             this.login(
                 {
                     email: this.form.email,
                     password: this.form.password,
                 },
             );
+            */
         },
         google() {
-            //console.log('auth',auth);
+            this.loginWithGoogle({
+                displayName: 'Pablo Contreras',
+                email: 'pacg1991@gmail.com',
+            });
+            /*
             console.log('providerGoogle',providerGoogle);
             auth.signInWithPopup(providerGoogle)
-                .then((result) => {
-                    
-                    const credential = result.credential;
-                    console.log('credential',credential);
+            .then((result) => {
+                
+                const credential = result.credential;
+                console.log('credential',credential);
 
-                    // This gives you a Google Access Token. You can use it to access the Google API.
-                    const token = credential.accessToken;
-                    console.log('token',token);
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const token = credential.accessToken;
+                console.log('token',token);
 
-                    // The signed-in user info.
-                    const user = result.user;
-                    console.log('user',user);
-                    // ...
+                // The signed-in user info.
+                const user = result.user;
+                console.log('user',user);
+                // ...
 
-                }).catch((error) => {
+            }).catch((error) => {
 
-                    // Handle Errors here.
-                    const errorCode = error.code;
-                    console.log('errorCode',errorCode);
+                // Handle Errors here.
+                const errorCode = error.code;
+                console.log('errorCode',errorCode);
 
-                    const errorMessage = error.message;
-                    console.log('errorMessage',errorMessage);
+                const errorMessage = error.message;
+                console.log('errorMessage',errorMessage);
 
-                    // The email of the user's account used.
-                    const email = error.email;
-                    console.log('email',email);
+                // The email of the user's account used.
+                const email = error.email;
+                console.log('email',email);
 
-                    // The firebase.auth.AuthCredential type that was used.
-                    const credential = error.credential;
-                    console.log('credential',credential);
+                // The firebase.auth.AuthCredential type that was used.
+                const credential = error.credential;
+                console.log('credential',credential);
 
-                });
+            });
+            */
         },
         submitPhone()
         {
